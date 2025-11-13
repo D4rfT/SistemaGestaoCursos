@@ -1,0 +1,9 @@
+﻿using Application.Models;
+
+namespace Application.Models
+{
+    public abstract class BaseDto
+    {
+        public int Id { get; set; }
+    }
+}
