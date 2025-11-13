@@ -6,7 +6,7 @@ namespace Domain.Entities
     {
         public string Nome {  get; private set; }
         public string CPF { get; private set; }
-        public string Matricula { get; private set; }
+        public string RegistroAcademico { get; private set; }
         public string Email { get; private set; }
         public DateTime DataNascimento { get; private set; }
         public int CursoId { get; private set; }
@@ -14,11 +14,11 @@ namespace Domain.Entities
 
         private Aluno() { }
 
-        public Aluno (string nome, string cpf, string matricula, string email, DateTime dataNascimento, int cursoId)
+        public Aluno (string nome, string cpf, string registroAcademico, string email, DateTime dataNascimento, int cursoId)
         {
             Nome = nome ?? throw new ArgumentNullException(nameof(nome));
             CPF = ValidarCPF(cpf);
-            Matricula = matricula ?? throw new ArgumentNullException(nameof(matricula));
+            RegistroAcademico = registroAcademico ?? throw new ArgumentNullException(nameof(registroAcademico));
             Email = ValidarEmail(email);
             DataNascimento = ValidarDataNascimento(dataNascimento);
             CursoId = cursoId > 0 ? cursoId : throw new ArgumentException("ID do curso inválido");

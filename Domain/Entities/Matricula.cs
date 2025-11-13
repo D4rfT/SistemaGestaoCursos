@@ -1,8 +1,9 @@
-﻿namespace Domain.Entities
+﻿using Domain.Common;
+
+namespace Domain.Entities
 {
-    public class Matricula
+    public class Matricula :BaseEntity
     {
-        public string NumeroMatricula { get; private set; }
         public int AlunoId { get; private set; }
         public int CursoId { get; private set; }
         public DateTime DataMatricula { get; private set; }
@@ -10,9 +11,8 @@
 
         private Matricula(){}
 
-        public Matricula(string numeroMatricula, int alunoId, int cursoId) 
+        public Matricula(int alunoId, int cursoId) 
         {
-            NumeroMatricula = numeroMatricula ?? throw new ArgumentNullException(nameof(numeroMatricula));
             AlunoId = alunoId > 0 ? alunoId : throw new ArgumentException("ID do aluno inválido");
             CursoId = cursoId > 0 ? cursoId : throw new ArgumentException("ID do curso inválido");
             DataMatricula = DateTime.UtcNow;

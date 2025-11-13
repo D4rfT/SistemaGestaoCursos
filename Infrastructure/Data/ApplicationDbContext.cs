@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,16 @@ namespace Infrastructure.Data
         {
         }
 
-        // DbSets serão adicionados aqui depois das entidades
+        public DbSet<Curso> Cursos { get; set; }
+        public DbSet<Aluno> Alunos { get; set; }
+        public DbSet<Matricula> Matriculas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Aplica todas as configurações da pasta Configurations
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //Busca no infrastructure classes que implementem IEntityTypeConfiguration<T>
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());  
         }
     }
 }

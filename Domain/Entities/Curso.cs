@@ -7,11 +7,10 @@ namespace Domain.Entities
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
-        public int Duracao { get; private set; } // em horas
+        public int Duracao { get; private set; }
         public bool Ativo { get; private set; }
         public DateTime DataCriacao { get; private set; }
 
-        // Construtor privado para EF
         private Curso() { }
 
         public Curso(string nome, string descricao, decimal preco, int duracao)
@@ -24,7 +23,6 @@ namespace Domain.Entities
             DataCriacao = DateTime.UtcNow;
         }
 
-        // Métodos de negócio
         public void AtualizarInformacoes(string nome, string descricao, decimal preco, int duracao)
         {
             Nome = nome ?? throw new ArgumentNullException(nameof(nome));
