@@ -3,32 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\infrastructure\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\infrastructure\\repositories\\matricularepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\matricularepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\infrastructure\\repositories\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\infrastructure\\repositories\\alunorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\alunorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\infrastructure\\repositories\\cursorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\cursorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\infrastructure\\repositories\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F7F108AA-C903-411A-B40A-551E947EE5ED}|Application\\Application.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\application\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7F108AA-C903-411A-B40A-551E947EE5ED}|Application\\Application.csproj|solutionrelative:application\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\infrastructure\\repositories\\matricularepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\matricularepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F7F108AA-C903-411A-B40A-551E947EE5ED}|Application\\Application.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\application\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F7F108AA-C903-411A-B40A-551E947EE5ED}|Application\\Application.csproj|solutionrelative:application\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\infrastructure\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\infrastructure\\repositories\\cursorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\cursorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7F108AA-C903-411A-B40A-551E947EE5ED}|Application\\Application.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\application\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7F108AA-C903-411A-B40A-551E947EE5ED}|Application\\Application.csproj|solutionrelative:application\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F7F108AA-C903-411A-B40A-551E947EE5ED}|Application\\Application.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\application\\interfaces\\ialunorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -122,24 +122,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UnitOfWork.cs",
-              "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Infrastructure\\Repositories\\UnitOfWork.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\UnitOfWork.cs",
-              "ToolTip": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Infrastructure\\Repositories\\UnitOfWork.cs",
-              "RelativeToolTip": "Infrastructure\\Repositories\\UnitOfWork.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T19:56:42.671Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MatriculaRepository.cs",
               "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Infrastructure\\Repositories\\MatriculaRepository.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Repositories\\MatriculaRepository.cs",
@@ -152,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "AlunoRepository.cs",
               "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Infrastructure\\Repositories\\AlunoRepository.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Repositories\\AlunoRepository.cs",
@@ -165,7 +152,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "CursoRepository.cs",
               "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Infrastructure\\Repositories\\CursoRepository.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Repositories\\CursoRepository.cs",
@@ -173,25 +160,24 @@
               "RelativeToolTip": "Infrastructure\\Repositories\\CursoRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T19:56:02.807Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T19:56:02.807Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "BaseRepository.cs",
               "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Infrastructure\\Repositories\\BaseRepository.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Repositories\\BaseRepository.cs",
               "ToolTip": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Infrastructure\\Repositories\\BaseRepository.cs",
               "RelativeToolTip": "Infrastructure\\Repositories\\BaseRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-14T19:55:51.287Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "IUnitOfWork.cs",
               "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Application\\Interfaces\\IUnitOfWork.cs",
               "RelativeDocumentMoniker": "Application\\Interfaces\\IUnitOfWork.cs",
@@ -199,8 +185,7 @@
               "RelativeToolTip": "Application\\Interfaces\\IUnitOfWork.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T19:30:26.886Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T19:30:26.886Z"
             },
             {
               "$type": "Document",
@@ -212,8 +197,7 @@
               "RelativeToolTip": "Application\\Interfaces\\IMatriculaRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T19:29:19.859Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T19:29:19.859Z"
             },
             {
               "$type": "Document",
@@ -225,8 +209,7 @@
               "RelativeToolTip": "Application\\Interfaces\\IAlunoRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T19:29:01.198Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T19:29:01.198Z"
             },
             {
               "$type": "Document",
@@ -238,12 +221,11 @@
               "RelativeToolTip": "Application\\Interfaces\\ICursoRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T19:28:34.473Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T19:28:34.473Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "IRepository.cs",
               "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Application\\Interfaces\\IRepository.cs",
               "RelativeDocumentMoniker": "Application\\Interfaces\\IRepository.cs",
@@ -256,16 +238,27 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Infrastructure\\Repositories\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Infrastructure\\Repositories\\UnitOfWork.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\UnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T19:56:42.671Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "Application",
+              "Title": "Application.csproj",
               "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Application\\Application.csproj",
               "RelativeDocumentMoniker": "Application\\Application.csproj",
               "ToolTip": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Application\\Application.csproj",
               "RelativeToolTip": "Application\\Application.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-11-14T19:16:39.97Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T19:16:39.97Z"
             },
             {
               "$type": "Document",
@@ -277,8 +270,7 @@
               "RelativeToolTip": "Application\\Queries\\GetCursosAtivosQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:58:15.688Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:58:15.688Z"
             },
             {
               "$type": "Document",
@@ -290,8 +282,7 @@
               "RelativeToolTip": "Application\\Queries\\GetCursosComFiltrosQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:45:36.75Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:45:36.75Z"
             },
             {
               "$type": "Document",
@@ -303,8 +294,7 @@
               "RelativeToolTip": "Domain\\Entities\\Matricula.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:43:06.07Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:43:06.07Z"
             },
             {
               "$type": "Document",
@@ -316,8 +306,7 @@
               "RelativeToolTip": "Domain\\Entities\\Curso.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:14:11.134Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:14:11.134Z"
             },
             {
               "$type": "Document",
@@ -329,8 +318,7 @@
               "RelativeToolTip": "Application\\Commands\\CreateCursoCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:06:33.625Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:06:33.625Z"
             },
             {
               "$type": "Document",
@@ -342,8 +330,7 @@
               "RelativeToolTip": "Application\\Commands\\UpdateCursoCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:30:17.33Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:30:17.33Z"
             },
             {
               "$type": "Document",
@@ -355,8 +342,7 @@
               "RelativeToolTip": "Application\\Commands\\MatricularAlunoCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:30:02.204Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:30:02.204Z"
             },
             {
               "$type": "Document",
@@ -368,8 +354,7 @@
               "RelativeToolTip": "Application\\Queries\\GetAllCursosQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:46:34.885Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:46:34.885Z"
             },
             {
               "$type": "Document",
@@ -381,8 +366,7 @@
               "RelativeToolTip": "Application\\Queries\\GetCursoByIdQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:48:41.626Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:48:41.626Z"
             },
             {
               "$type": "Document",
@@ -394,8 +378,7 @@
               "RelativeToolTip": "Application\\Queries\\GetAlunoByIdQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:55:28.681Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:55:28.681Z"
             },
             {
               "$type": "Document",
@@ -407,8 +390,7 @@
               "RelativeToolTip": "Application\\Queries\\GetAllAlunosQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:57:07.641Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:57:07.641Z"
             },
             {
               "$type": "Document",
@@ -420,8 +402,7 @@
               "RelativeToolTip": "Application\\Commands\\DesativarCursoCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:30:25.658Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:30:25.658Z"
             },
             {
               "$type": "Document",
@@ -433,8 +414,7 @@
               "RelativeToolTip": "Application\\Commands\\CreateAlunoCommand.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAqwBoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:11:11.103Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:11:11.103Z"
             },
             {
               "$type": "Document",
@@ -446,8 +426,7 @@
               "RelativeToolTip": "Application\\Commands\\AtivarCursoCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-13T20:30:27.659Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-13T20:30:27.659Z"
             },
             {
               "$type": "Document",
@@ -459,8 +438,7 @@
               "RelativeToolTip": "Domain\\Entities\\Aluno.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAA1wAsAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:13:46.294Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:13:46.294Z"
             },
             {
               "$type": "Document",
@@ -472,8 +450,7 @@
               "RelativeToolTip": "Infrastructure\\Data\\Configurations\\CursoConfiguration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:05:00.841Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:05:00.841Z"
             },
             {
               "$type": "Document",
@@ -485,8 +462,7 @@
               "RelativeToolTip": "Infrastructure\\Data\\Configurations\\AlunoConfiguration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:04:56.916Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:04:56.916Z"
             }
           ]
         }
