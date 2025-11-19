@@ -8,6 +8,8 @@ namespace Domain.Entities
         public int CursoId { get; private set; }
         public DateTime DataMatricula { get; private set; }
         public bool Ativa { get; private set; }
+        public Aluno Aluno { get; private set; }
+        public Curso Curso { get; private set; }
 
         private Matricula(){}
 

@@ -18,12 +18,12 @@ namespace Infrastructure.Data.Configurations
 
             builder.Property(m => m.Ativa).IsRequired();
 
-            builder.HasOne<Curso>()
+            builder.HasOne<Curso>(m => m.Curso)
                 .WithMany()
                 .HasForeignKey(m => m.CursoId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne<Aluno>()
+            builder.HasOne<Aluno>(m => m.Aluno)
                 .WithMany()
                 .HasForeignKey(m => m.AlunoId)
                 .OnDelete(DeleteBehavior.Restrict);

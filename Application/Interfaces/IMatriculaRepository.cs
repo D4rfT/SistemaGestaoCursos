@@ -8,5 +8,6 @@ namespace Application.Interfaces
         Task<IEnumerable<Matricula>> GetMatriculasPorAlunoAsync(int alunoId);
         Task<IEnumerable<Matricula>> GetMatriculasPorCursoAsync(int cursoId);
         Task<Matricula> GetMatriculaAtivaPorAlunoECursoAsync(int alunoId, int cursoId);
+        Task<IEnumerable<Matricula>> GetMatriculasComDadosRelacionadosAsync();
     }
 }

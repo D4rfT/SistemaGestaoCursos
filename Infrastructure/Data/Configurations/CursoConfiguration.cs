@@ -25,6 +25,11 @@ namespace Infrastructure.Data.Configurations
             builder.HasIndex(c => c.Nome);
             builder.HasIndex(c => c.Ativo);
 
+            builder.HasMany(c => c.Alunos)
+            .WithOne(a => a.Curso)
+            .HasForeignKey(a => a.CursoId)
+            .OnDelete(DeleteBehavior.Restrict);
+
             builder.ToTable("Cursos");
         }
     }

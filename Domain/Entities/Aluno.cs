@@ -10,6 +10,7 @@ namespace Domain.Entities
         public string Email { get; private set; }
         public DateTime DataNascimento { get; private set; }
         public int CursoId { get; private set; }
+        public Curso Curso { get; private set; }
 
 
         private Aluno() { }

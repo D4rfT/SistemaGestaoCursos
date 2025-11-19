@@ -10,6 +10,7 @@ namespace Domain.Entities
         public int Duracao { get; private set; }
         public bool Ativo { get; private set; }
         public DateTime DataCriacao { get; private set; }
+        public ICollection<Aluno> Alunos { get; private set; } = new List<Aluno>();
 
         private Curso() { }
 
