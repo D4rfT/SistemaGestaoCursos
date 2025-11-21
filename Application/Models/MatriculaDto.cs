@@ -8,6 +8,8 @@ namespace Application.Models
         public int CursoId { get; set; }
         public DateTime DataMatricula { get; set; }
         public bool Ativa { get; set; }
+        public string AlunoNome { get; set; }
+        public string CursoNome { get; set; }
 
         public MatriculaDto() { }
 

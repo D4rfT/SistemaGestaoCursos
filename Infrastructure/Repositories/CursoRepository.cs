@@ -11,14 +11,17 @@ namespace Infrastructure.Repositories
         {
         }
 
-        public async Task<Curso> GetByNomeAsync(string nome)
+        public async Task<Curso> GetByNomeAsync(string nome, CancellationToken cancellationToken = default)
         {
-            return await _dbSet.FirstOrDefaultAsync(c => c.Nome.ToLower() == nome.ToLower());
+            return await _dbSet
+                .FirstOrDefaultAsync(c => c.Nome.ToLower() == nome.ToLower(), cancellationToken);
         }
 
-        public async Task<IEnumerable<Curso>> GetCursosAtivosAsync()
+        public async Task<IEnumerable<Curso>> GetCursosAtivosAsync(CancellationToken cancellationToken = default)
         {
-            return await _dbSet.Where(c => c.Ativo).ToListAsync();
+            return await _dbSet
+                .Where(c => c.Ativo)
+                .ToListAsync(cancellationToken);
         }
 
         public async Task<IEnumerable<Curso>> GetCursosComFiltrosAsync(
@@ -27,7 +30,8 @@ namespace Infrastructure.Repositories
             decimal? precoMaximo = null,
             int? duracaoMinima = null,
             int? duracaoMaxima = null,
-            bool? ativo = null)
+            bool? ativo = null,
+            CancellationToken cancellationToken = default)
         {
             IQueryable<Curso> query = _dbSet;
 
@@ -49,7 +53,7 @@ namespace Infrastructure.Repositories
             if (ativo.HasValue)
                 query = query.Where(c => c.Ativo == ativo.Value);
 
-            return await query.ToListAsync();
+            return await query.ToListAsync(cancellationToken);
         }
     }
 }

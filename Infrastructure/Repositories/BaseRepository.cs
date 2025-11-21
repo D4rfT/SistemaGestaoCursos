@@ -14,22 +14,22 @@ namespace Infrastructure.Repositories
         public BaseRepository(ApplicationDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<T>();       
+            _dbSet = context.Set<T>();
         }
 
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            return await _dbSet.FindAsync(id);
+            return await _dbSet.FindAsync(new object[] { id }, cancellationToken);
         }
 
-        public virtual async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet.ToListAsync(cancellationToken);
         }
 
-        public virtual async Task<T> AddAsync(T entity)
+        public virtual async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
         {
-            await _dbSet.AddAsync(entity);
+            await _dbSet.AddAsync(entity, cancellationToken);
             return entity;
         }
 
@@ -43,20 +43,19 @@ namespace Infrastructure.Repositories
             _dbSet.Remove(entity);
         }
 
-        public virtual async Task<bool> ExistsAsync(int id)
+        public virtual async Task<bool> ExistsAsync(int id, CancellationToken cancellationToken = default)
         {
-            return await _dbSet.AnyAsync(e => e.Id == id);
+            return await _dbSet.AnyAsync(e => e.Id == id, cancellationToken);
         }
 
-        //Um Func roda somente na memória, por isso precisamos do Expression, para o EF Core transformar em SQL.
-        public virtual async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate) 
+        public virtual async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
         {
-            return await _dbSet.Where(predicate).ToListAsync();
+            return await _dbSet.Where(predicate).ToListAsync(cancellationToken);
         }
 
-        public virtual async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        public virtual async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
         {
-            return await _dbSet.FirstOrDefaultAsync(predicate);
+            return await _dbSet.FirstOrDefaultAsync(predicate, cancellationToken);
         }
     }
 }
