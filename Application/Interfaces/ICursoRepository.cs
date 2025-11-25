@@ -15,6 +15,8 @@ namespace Application.Interfaces
             int? duracaoMinima = null,
             int? duracaoMaxima = null,
             bool? ativo = null,
+            string? ordenarPor = null,
+            bool ordemDescendente = false,
             CancellationToken cancellationToken = default);
     }
 }

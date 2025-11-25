@@ -31,6 +31,8 @@ namespace Infrastructure.Repositories
             int? duracaoMinima = null,
             int? duracaoMaxima = null,
             bool? ativo = null,
+            string? ordenarPor = null,
+            bool ordemDescendente = false,
             CancellationToken cancellationToken = default)
         {
             IQueryable<Curso> query = _dbSet;
@@ -53,7 +55,25 @@ namespace Infrastructure.Repositories
             if (ativo.HasValue)
                 query = query.Where(c => c.Ativo == ativo.Value);
 
+            query = AplicarOrdenacao(query, ordenarPor, ordemDescendente);
+
             return await query.ToListAsync(cancellationToken);
         }
-    }
+
+        private IQueryable<Curso> AplicarOrdenacao(IQueryable<Curso> query, string ordenarPor, bool ordemDescendente)
+        {
+            if (string.IsNullOrWhiteSpace(ordenarPor))
+                return query;
+
+            return ordenarPor.ToLower() switch
+            {
+                "nome" => ordemDescendente ? query.OrderByDescending(c => c.Nome) : query.OrderBy(c => c.Nome),
+                "preco" => ordemDescendente ? query.OrderByDescending(c => c.Preco) : query.OrderBy(c => c.Preco),
+                "duracao" => ordemDescendente ? query.OrderByDescending(c => c.Duracao) : query.OrderBy(c => c.Duracao),
+                "datacriacao" => ordemDescendente ? query.OrderByDescending(c => c.DataCriacao) : query.OrderBy(c => c.DataCriacao),
+                _ => query
+            };
+        }
+
+    }   
 }
