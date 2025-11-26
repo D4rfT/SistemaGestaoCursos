@@ -102,7 +102,6 @@ C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\n
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\SistemaGestaoCursos.AssemblyInfoInputs.cache
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\SistemaGestaoCursos.AssemblyInfo.cs
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\SistemaGestaoCursos.csproj.CoreCompileInputs.cache
-C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\SistemaGestaoCursos.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\SistemaGestaoCursos.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\SistemaGestaoCursos.sourcelink.json
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\rjimswa.dswa.cache.json
@@ -113,7 +112,6 @@ C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\n
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\SistemaG.EC7AB40C.Up2Date
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\SistemaGestaoCursos.dll
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\refint\SistemaGestaoCursos.dll
