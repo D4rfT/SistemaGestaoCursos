@@ -2,11 +2,11 @@
 
 namespace Application.Commands
 {
-    public class AtivarCursoCommand : IRequest<bool>
+    public class DesativarMatriculaCommand : IRequest<bool>
     {
         public int Id { get; set; }
 
-        public AtivarCursoCommand(int id)
+        public DesativarMatriculaCommand(int id)
         {
             Id = id;
         }

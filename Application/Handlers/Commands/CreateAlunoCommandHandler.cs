@@ -53,6 +53,7 @@ namespace Application.Handlers.Commands
                 RegistroAcademico = aluno.RegistroAcademico,
                 Email = aluno.Email,
                 DataNascimento = aluno.DataNascimento,
+                Ativo = aluno.Ativo,
                 CursoId = aluno.CursoId,
             };
         }

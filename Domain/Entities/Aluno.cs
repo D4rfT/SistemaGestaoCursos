@@ -10,6 +10,7 @@ namespace Domain.Entities
         public string Email { get; private set; }
         public DateTime DataNascimento { get; private set; }
         public int CursoId { get; private set; }
+        public bool Ativo { get; private set; }
         public Curso Curso { get; private set; }
 
 
@@ -65,5 +66,10 @@ namespace Domain.Entities
 
             return dataNascimento;
         }
+
+        public void DesativarAluno() => Ativo = false;
+
+        public void ReativarAluno() => Ativo = true;
+
     }
 }

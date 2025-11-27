@@ -9,6 +9,7 @@ namespace Application.Models
         public string RegistroAcademico { get; set; }
         public string Email { get; set; }
         public DateTime DataNascimento { get; set; }
+        public bool Ativo { get; set; }
         public int CursoId { get; set; }
 
         public AlunoDto() { }

@@ -5,16 +5,16 @@ using MediatR;
 
 namespace Application.Handlers.Commands
 {
-    public class AtivarCursoCommandHandler : IRequestHandler<AtivarCursoCommand, bool>
+    public class ReativarCursoCommandHandler : IRequestHandler<ReativarCursoCommand, bool>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public AtivarCursoCommandHandler(IUnitOfWork unitOfWork)
+        public ReativarCursoCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> Handle(AtivarCursoCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(ReativarCursoCommand request, CancellationToken cancellationToken)
         {
             var curso = await _unitOfWork.Cursos.GetByIdAsync(request.Id, cancellationToken);
             if (curso == null)

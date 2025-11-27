@@ -32,14 +32,9 @@ namespace Domain.Entities
             Duracao = duracao > 0 ? duracao : throw new ArgumentException("Duração deve ser positiva");
         }
 
-        public void Desativar()
-        {
-            Ativo = false;
-        }
+        public void Desativar() => Ativo = false;
 
-        public void Ativar()
-        {
-            Ativo = true;
-        }
+        public void Ativar() => Ativo = true;
+
     }
 }
