@@ -32,14 +32,14 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<AlunoDto>> Create(CreateAlunoCommand command)
+        public async Task<ActionResult<AlunoDto>> Create([FromBody]CreateAlunoCommand command)
         {
             var aluno = await _mediator.Send(command);
             return CreatedAtAction(nameof(GetById), new {id = aluno.Id}, aluno);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<AlunoDto>> Update(int id, UpdateAlunoCommand command)
+        public async Task<ActionResult<AlunoDto>> Update(int id, [FromBody] UpdateAlunoCommand command)
         {
             if (id != command.Id)
                 return BadRequest("ID inserido não compatível com o ID encontrado");

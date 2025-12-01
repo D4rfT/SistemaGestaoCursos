@@ -46,7 +46,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<MatriculaDto>> Create(MatricularAlunoCommand command)
+        public async Task<ActionResult<MatriculaDto>> Create([FromBody] MatricularAlunoCommand command)
         {
             var matricula = await _mediator.Send(command);
             return CreatedAtAction(nameof(GetById), new { id = matricula.Id }, matricula);

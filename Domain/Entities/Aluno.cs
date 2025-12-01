@@ -24,6 +24,19 @@ namespace Domain.Entities
             Email = ValidarEmail(email);
             DataNascimento = ValidarDataNascimento(dataNascimento);
             CursoId = cursoId > 0 ? cursoId : throw new ArgumentException("ID do curso inválido");
+            Ativo = true;
+        }
+
+        public Aluno(string nome, string cpf, string email, DateTime dataNascimento, int cursoId)
+        {
+            Nome = nome ?? throw new ArgumentNullException(nameof(nome));
+            CPF = ValidarCPF(cpf);
+            Email = ValidarEmail(email);
+            DataNascimento = ValidarDataNascimento(dataNascimento);
+            CursoId = cursoId > 0 ? cursoId : throw new ArgumentException("ID do curso inválido");
+            Ativo = true;
+
+            RegistroAcademico = "TEMP";
         }
 
         public void AtualizarInformacoes(string nome, string email, DateTime dataNascimento)

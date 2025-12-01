@@ -8,6 +8,8 @@ namespace Application.Commands
         public int AlunoId { get; set; }
         public int CursoId { get; set; }
 
+
+
         public MatricularAlunoCommand(int alunoId, int cursoId)
         {
             AlunoId = alunoId;

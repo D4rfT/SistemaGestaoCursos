@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36616.10 d17.14
+VisualStudioVersion = 17.14.36616.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaGestaoCursos", "SistemaGestaoCursos\SistemaGestaoCursos.csproj", "{ACE1270E-218F-4979-BEEC-0B16796F7155}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{F7F108AA-C903-411A-B40A-551E947EE5ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit", "Tests.Unit\Tests.Unit.csproj", "{318F4B7E-47DE-48F4-910C-AE201337FAC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{318F4B7E-47DE-48F4-910C-AE201337FAC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{318F4B7E-47DE-48F4-910C-AE201337FAC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{318F4B7E-47DE-48F4-910C-AE201337FAC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{318F4B7E-47DE-48F4-910C-AE201337FAC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

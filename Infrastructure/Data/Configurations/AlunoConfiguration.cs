@@ -23,6 +23,8 @@ namespace Infrastructure.Data.Configurations
 
             builder.Property(a => a.CursoId).IsRequired();
 
+            builder.Property(a => a.Ativo).IsRequired();
+
             builder.HasOne<Curso>()
                 .WithMany(c => c.Alunos)
                 .HasForeignKey(a => a.CursoId)

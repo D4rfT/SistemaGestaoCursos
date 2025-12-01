@@ -10,6 +10,8 @@ namespace Application.Commands
         public decimal Preco { get; set; }
         public int Duracao { get; set; }
 
+        public CreateCursoCommand() { }
+
         public CreateCursoCommand(string nome, string descricao, decimal preco, int duracao)
         {
             Nome = nome;

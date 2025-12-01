@@ -30,6 +30,9 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<Matricula>> GetMatriculasPorAlunoAsync(int alunoId, CancellationToken cancellationToken = default)
         {
             return await _dbSet
+                .Include(m => m.Aluno)
+                    .ThenInclude(a => a.Curso)
+                .Include(m => m.Curso)
                 .Where(m => m.AlunoId == alunoId)
                 .OrderByDescending(m => m.DataMatricula)
                 .ToListAsync(cancellationToken);
@@ -38,6 +41,9 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<Matricula>> GetMatriculasPorCursoAsync(int cursoId, CancellationToken cancellationToken = default)
         {
             return await _dbSet
+                .Include(m => m.Aluno)
+                    .ThenInclude(a => a.Curso)
+                .Include(m => m.Curso)
                 .Where(m => m.CursoId == cursoId)
                 .OrderByDescending(m => m.DataMatricula)
                 .ToListAsync(cancellationToken);
@@ -56,6 +62,7 @@ namespace Infrastructure.Repositories
         {
             return await _dbSet
                 .Include(m => m.Aluno)
+                    .ThenInclude(a => a.Curso)
                 .Include(m => m.Curso)
                 .OrderByDescending(m => m.DataMatricula)
                 .ToListAsync(cancellationToken);
