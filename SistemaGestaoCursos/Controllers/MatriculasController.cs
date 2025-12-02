@@ -60,7 +60,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPatch("desativar/{id}")]
-        public async Task<ActionResult> Desativar (int id)
+        public async Task<ActionResult> Desativar(int id)
         {
             var result = await _mediator.Send(new DesativarMatriculaCommand(id));
             return Ok(new { message = "Matrícula desativada com sucesso", success = result });

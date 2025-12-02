@@ -4,7 +4,7 @@ namespace Domain.Entities
 {
     public class Aluno : BaseEntity
     {
-        public string Nome {  get; private set; }
+        public string Nome { get; private set; }
         public string CPF { get; private set; }
         public string RegistroAcademico { get; private set; }
         public string Email { get; private set; }
@@ -16,7 +16,7 @@ namespace Domain.Entities
 
         private Aluno() { }
 
-        public Aluno (string nome, string cpf, string registroAcademico, string email, DateTime dataNascimento, int cursoId)
+        public Aluno(string nome, string cpf, string registroAcademico, string email, DateTime dataNascimento, int cursoId)
         {
             Nome = nome ?? throw new ArgumentNullException(nameof(nome));
             CPF = ValidarCPF(cpf);

@@ -32,10 +32,10 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<AlunoDto>> Create([FromBody]CreateAlunoCommand command)
+        public async Task<ActionResult<AlunoDto>> Create([FromBody] CreateAlunoCommand command)
         {
             var aluno = await _mediator.Send(command);
-            return CreatedAtAction(nameof(GetById), new {id = aluno.Id}, aluno);
+            return CreatedAtAction(nameof(GetById), new { id = aluno.Id }, aluno);
         }
 
         [HttpPut("{id}")]

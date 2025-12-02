@@ -23,162 +23,162 @@ namespace Infrastructure.Migrations
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Domain.Entities.Aluno", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("boolean");
+                b.Property<bool>("Ativo")
+                    .HasColumnType("boolean");
 
-                    b.Property<string>("CPF")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("character(11)")
-                        .IsFixedLength();
+                b.Property<string>("CPF")
+                    .IsRequired()
+                    .HasMaxLength(11)
+                    .HasColumnType("character(11)")
+                    .IsFixedLength();
 
-                    b.Property<int>("CursoId")
-                        .HasColumnType("integer");
+                b.Property<int>("CursoId")
+                    .HasColumnType("integer");
 
-                    b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("timestamp with time zone");
+                b.Property<DateTime>("DataNascimento")
+                    .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("character varying(100)");
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                b.Property<string>("Nome")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("character varying(100)");
 
-                    b.Property<string>("RegistroAcademico")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                b.Property<string>("RegistroAcademico")
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .HasColumnType("character varying(20)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("CPF")
-                        .IsUnique();
+                b.HasIndex("CPF")
+                    .IsUnique();
 
-                    b.HasIndex("CursoId");
+                b.HasIndex("CursoId");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
+                b.HasIndex("Email")
+                    .IsUnique();
 
-                    b.HasIndex("RegistroAcademico")
-                        .IsUnique();
+                b.HasIndex("RegistroAcademico")
+                    .IsUnique();
 
-                    b.ToTable("Alunos", (string)null);
-                });
+                b.ToTable("Alunos", (string)null);
+            });
 
             modelBuilder.Entity("Domain.Entities.Curso", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("boolean");
+                b.Property<bool>("Ativo")
+                    .HasColumnType("boolean");
 
-                    b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("timestamp with time zone");
+                b.Property<DateTime>("DataCriacao")
+                    .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                b.Property<string>("Descricao")
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .HasColumnType("character varying(500)");
 
-                    b.Property<int>("Duracao")
-                        .HasColumnType("integer");
+                b.Property<int>("Duracao")
+                    .HasColumnType("integer");
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                b.Property<string>("Nome")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("character varying(100)");
 
-                    b.Property<decimal>("Preco")
-                        .HasColumnType("decimal(18,2)");
+                b.Property<decimal>("Preco")
+                    .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("Ativo");
+                b.HasIndex("Ativo");
 
-                    b.HasIndex("Nome");
+                b.HasIndex("Nome");
 
-                    b.ToTable("Cursos", (string)null);
-                });
+                b.ToTable("Cursos", (string)null);
+            });
 
             modelBuilder.Entity("Domain.Entities.Matricula", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AlunoId")
-                        .HasColumnType("integer");
+                b.Property<int>("AlunoId")
+                    .HasColumnType("integer");
 
-                    b.Property<bool>("Ativa")
-                        .HasColumnType("boolean");
+                b.Property<bool>("Ativa")
+                    .HasColumnType("boolean");
 
-                    b.Property<int>("CursoId")
-                        .HasColumnType("integer");
+                b.Property<int>("CursoId")
+                    .HasColumnType("integer");
 
-                    b.Property<DateTime>("DataMatricula")
-                        .HasColumnType("timestamp with time zone");
+                b.Property<DateTime>("DataMatricula")
+                    .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("CursoId");
+                b.HasIndex("CursoId");
 
-                    b.HasIndex("AlunoId", "CursoId")
-                        .IsUnique();
+                b.HasIndex("AlunoId", "CursoId")
+                    .IsUnique();
 
-                    b.ToTable("Matriculas");
-                });
+                b.ToTable("Matriculas");
+            });
 
             modelBuilder.Entity("Domain.Entities.Aluno", b =>
-                {
-                    b.HasOne("Domain.Entities.Curso", "Curso")
-                        .WithMany("Alunos")
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+            {
+                b.HasOne("Domain.Entities.Curso", "Curso")
+                    .WithMany("Alunos")
+                    .HasForeignKey("CursoId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.Navigation("Curso");
-                });
+                b.Navigation("Curso");
+            });
 
             modelBuilder.Entity("Domain.Entities.Matricula", b =>
-                {
-                    b.HasOne("Domain.Entities.Aluno", "Aluno")
-                        .WithMany()
-                        .HasForeignKey("AlunoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+            {
+                b.HasOne("Domain.Entities.Aluno", "Aluno")
+                    .WithMany()
+                    .HasForeignKey("AlunoId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.HasOne("Domain.Entities.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                b.HasOne("Domain.Entities.Curso", "Curso")
+                    .WithMany()
+                    .HasForeignKey("CursoId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.Navigation("Aluno");
+                b.Navigation("Aluno");
 
-                    b.Navigation("Curso");
-                });
+                b.Navigation("Curso");
+            });
 
             modelBuilder.Entity("Domain.Entities.Curso", b =>
-                {
-                    b.Navigation("Alunos");
-                });
+            {
+                b.Navigation("Alunos");
+            });
 #pragma warning restore 612, 618
         }
     }

@@ -29,7 +29,7 @@ namespace Application.Handlers.Commands
 
             var curso = await _unitOfWork.Cursos.GetByIdAsync(request.CursoId, cancellationToken);
             if (curso == null)
-                throw new InvalidOperationException($"Curso com ID {request.CursoId} não encontrado");     
+                throw new InvalidOperationException($"Curso com ID {request.CursoId} não encontrado");
 
             var novoAluno = new Aluno(request.Nome, request.CPF, registroAcademico, request.Email, request.DataNascimento, request.CursoId);
 
