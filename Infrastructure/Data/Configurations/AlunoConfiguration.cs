@@ -23,7 +23,7 @@ namespace Infrastructure.Data.Configurations
 
             builder.Property(a => a.CursoId).IsRequired();
 
-            builder.HasOne<Curso>()
+            builder.HasOne(a => a.Curso)
                 .WithMany(c => c.Alunos)
                 .HasForeignKey(a => a.CursoId)
                 .OnDelete(DeleteBehavior.Restrict);

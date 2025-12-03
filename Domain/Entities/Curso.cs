@@ -19,7 +19,7 @@ namespace Domain.Entities
             Nome = nome ?? throw new ArgumentNullException(nameof(nome));
             Descricao = descricao ?? throw new ArgumentNullException(nameof(descricao));
             Preco = preco >= 0 ? preco : throw new ArgumentException("Preço não pode ser negativo");
-            Duracao = duracao > 0 ? duracao : throw new ArgumentException("Duração deve ser positiva");
+            Duracao = duracao > 0 && duracao <= 500 ? duracao : throw new ArgumentException("Duração deve ser entre 1 e 500 horas");
             Ativo = true;
             DataCriacao = DateTime.UtcNow;
         }
@@ -29,7 +29,7 @@ namespace Domain.Entities
             Nome = nome ?? throw new ArgumentNullException(nameof(nome));
             Descricao = descricao ?? throw new ArgumentNullException(nameof(descricao));
             Preco = preco >= 0 ? preco : throw new ArgumentException("Preço não pode ser negativo");
-            Duracao = duracao > 0 ? duracao : throw new ArgumentException("Duração deve ser positiva");
+            Duracao = duracao > 0 && duracao <= 500 ? duracao : throw new ArgumentException("Duração deve ser entre 1 e 500 horas");
         }
 
         public void Desativar() => Ativo = false;

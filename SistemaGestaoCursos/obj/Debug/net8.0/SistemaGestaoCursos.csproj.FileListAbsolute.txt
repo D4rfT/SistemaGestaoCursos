@@ -118,3 +118,4 @@ C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\n
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\SistemaGestaoCursos.pdb
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\SistemaGestaoCursos.genruntimeconfig.cache
 C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\ref\SistemaGestaoCursos.dll
+C:\Users\Daniel\source\repos\SistemaGestaoCursos\SistemaGestaoCursos\obj\Debug\net8.0\SistemaGestaoCursos.MvcApplicationPartsAssemblyInfo.cs
