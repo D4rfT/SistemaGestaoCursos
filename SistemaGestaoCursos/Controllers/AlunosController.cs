@@ -2,12 +2,14 @@
 using Application.Models;
 using Application.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SistemaGestaoCursos.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class AlunosController : ControllerBase
     {
         private readonly IMediator _mediator;

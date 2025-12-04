@@ -1,6 +1,4 @@
-﻿using Application.Models;
-
-namespace Application.Models
+﻿namespace Application.Models
 {
     public class CursoDto : BaseDto
     {
@@ -12,7 +10,7 @@ namespace Application.Models
         public DateTime DataCriacao { get; set; }
 
 
-        public CursoDto() { } // Construtor vazio para serialização
+        public CursoDto() { }
 
     }
 }

@@ -1,6 +1,4 @@
-﻿using Application.Models;
-
-namespace Application.Models
+﻿namespace Application.Models
 {
     public class AlunoDto : BaseDto
     {

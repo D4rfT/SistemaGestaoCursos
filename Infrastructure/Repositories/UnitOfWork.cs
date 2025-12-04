@@ -15,11 +15,13 @@ namespace Infrastructure.Repositories
             Cursos = new CursoRepository(_context);
             Alunos = new AlunoRepository(_context);
             Matriculas = new MatriculaRepository(_context);
+            Usuarios = new UsuarioRepository(_context);
         }
 
         public ICursoRepository Cursos { get; private set; }
         public IAlunoRepository Alunos { get; private set; }
         public IMatriculaRepository Matriculas { get; private set; }
+        public IUsuarioRepository Usuarios { get; private set; }
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
