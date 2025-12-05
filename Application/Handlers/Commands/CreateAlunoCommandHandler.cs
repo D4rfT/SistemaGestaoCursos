@@ -30,8 +30,14 @@ namespace Application.Handlers.Commands
             var curso = await _unitOfWork.Cursos.GetByIdAsync(request.CursoId, cancellationToken);
             if (curso == null)
                 throw new InvalidOperationException($"Curso com ID {request.CursoId} não encontrado");
+            
+            //CPF vai ser a senha
+            var usuario = new Usuario(request.Nome, request.Email, request.CPF, "Aluno");
 
-            var novoAluno = new Aluno(request.Nome, request.CPF, registroAcademico, request.Email, request.DataNascimento, request.CursoId);
+            await _unitOfWork.Usuarios.AddAsync(usuario, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            var novoAluno = new Aluno(request.Nome, request.CPF, registroAcademico, request.Email, request.DataNascimento, request.CursoId, usuario.Id);
 
             await _unitOfWork.Alunos.AddAsync(novoAluno, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);

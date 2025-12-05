@@ -135,6 +135,26 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SistemaGestaoCursos.Controllers.AlunosController",
+    "Method": "GetMeusDados",
+    "RelativePath": "api/Alunos/meus-dados",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Application.Models.AlunoDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "SistemaGestaoCursos.Controllers.AutenticacaoController",
     "Method": "Login",
     "RelativePath": "api/Autenticacao/login",
@@ -520,6 +540,36 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaGestaoCursos.Controllers.MatriculasController",
+    "Method": "GetMinhasMatriculas",
+    "RelativePath": "api/Matriculas/minhas-matriculas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Application.Models.MatriculaDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SistemaGestaoCursos.Controllers.MigracaoController",
+    "Method": "MigrarAlunosParaUsuarios",
+    "RelativePath": "api/Migracao/alunos-para-usuarios",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

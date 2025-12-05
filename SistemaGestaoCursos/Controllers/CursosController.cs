@@ -20,6 +20,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<CursoDto>>> GetAll()
         {
             var cursos = await _mediator.Send(new GetAllCursosQuery());
@@ -27,6 +28,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpGet("ativos")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<CursoDto>>> GetAtivos()
         {
             var cursos = await _mediator.Send(new GetCursosAtivosQuery());
@@ -34,6 +36,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpGet("filtros")]
+        [Authorize(Roles = "Aluno,Secretaria,Administrador")]
         public async Task<ActionResult<List<CursoDto>>> GetComFiltros(
             [FromQuery] string? nome = null,
             [FromQuery] decimal? precoMinimo = null,
@@ -53,6 +56,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<CursoDto>> GetById(int id)
         {
             var curso = await _mediator.Send(new GetCursoByIdQuery(id));
@@ -60,6 +64,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<CursoDto>> Create([FromBody] CreateCursoCommand command)
         {
             var curso = await _mediator.Send(command);
@@ -67,6 +72,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<CursoDto>> Update(int id, [FromBody] UpdateCursoCommand command)
         {
             if (id != command.Id)
@@ -77,6 +83,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPatch("ativar/{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Ativar(int id)
         {
             var result = await _mediator.Send(new ReativarCursoCommand(id));
@@ -84,6 +91,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPatch("desativar/{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Desativar(int id)
         {
             var result = await _mediator.Send(new DesativarCursoCommand(id));

@@ -4,6 +4,7 @@ using Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace SistemaGestaoCursos.Controllers
 {
@@ -20,6 +21,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult<List<AlunoDto>>> GetAll()
         {
             var alunos = await _mediator.Send(new GetAllAlunosQuery());
@@ -27,13 +29,24 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult<AlunoDto>> GetById(int id)
         {
             var aluno = await _mediator.Send(new GetAlunoByIdQuery(id));
             return Ok(aluno);
         }
 
+        [HttpGet("meus-dados")]
+        [Authorize(Roles = "Aluno")]
+        public async Task<ActionResult<AlunoDto>> GetMeusDados()
+        {
+            var alunoId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var aluno = await _mediator.Send(new GetAlunoByIdQuery(alunoId));
+            return Ok(aluno);
+        }
+
         [HttpPost]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult<AlunoDto>> Create([FromBody] CreateAlunoCommand command)
         {
             var aluno = await _mediator.Send(command);
@@ -41,6 +54,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult<AlunoDto>> Update(int id, [FromBody] UpdateAlunoCommand command)
         {
             if (id != command.Id)
@@ -51,6 +65,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPatch("ativar/{id}")]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult> Ativar(int id)
         {
             var result = await _mediator.Send(new ReativarAlunoCommand(id));
@@ -58,10 +73,13 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPatch("desativar/{id}")]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult> Desativar(int id)
         {
             var result = await _mediator.Send(new DesativarAlunoCommand(id));
             return Ok(new { message = "Aluno desativado com sucesso", success = result });
         }
+
+
     }
 }

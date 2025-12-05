@@ -23,11 +23,12 @@ namespace Infrastructure.Data.Configurations
 
             builder.Property(a => a.CursoId).IsRequired();
 
+            builder.Property(a => a.UsuarioId).IsRequired(false);
+
             builder.HasOne(a => a.Curso)
                 .WithMany(c => c.Alunos)
                 .HasForeignKey(a => a.CursoId)
                 .OnDelete(DeleteBehavior.Restrict);
-
 
             builder.HasIndex(a => a.CPF).IsUnique();
             builder.HasIndex(a => a.RegistroAcademico).IsUnique();

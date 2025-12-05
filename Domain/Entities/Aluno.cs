@@ -11,12 +11,13 @@ namespace Domain.Entities
         public DateTime DataNascimento { get; private set; }
         public int CursoId { get; private set; }
         public bool Ativo { get; private set; }
+        public int? UsuarioId { get; private set; }
         public Curso Curso { get; private set; }
 
 
         private Aluno() { }
 
-        public Aluno(string nome, string cpf, string registroAcademico, string email, DateTime dataNascimento, int cursoId)
+        public Aluno(string nome, string cpf, string registroAcademico, string email, DateTime dataNascimento, int cursoId, int? usuarioId = null)
         {
             Nome = nome ?? throw new ArgumentNullException(nameof(nome));
             CPF = ValidarCPF(cpf);
@@ -24,6 +25,7 @@ namespace Domain.Entities
             Email = ValidarEmail(email);
             DataNascimento = ValidarDataNascimento(dataNascimento);
             CursoId = cursoId > 0 ? cursoId : throw new ArgumentException("ID do curso inválido");
+            UsuarioId = usuarioId;
             Ativo = true;
         }
 
@@ -78,6 +80,12 @@ namespace Domain.Entities
                 throw new ArgumentException("Aluno deve ter pelo menos 16 anos");
 
             return dataNascimento;
+        }
+
+        public void AssociarUsuario(int usuarioId)
+        {
+            UsuarioId = usuarioId > 0 ? usuarioId
+                : throw new ArgumentException("ID do usuário inválido");
         }
 
         public void DesativarAluno() => Ativo = false;

@@ -1,5 +1,6 @@
 ﻿using Application.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SistemaGestaoCursos.Controllers
@@ -16,6 +17,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             var command = new AutenticarCommand(request.Email, request.Senha);

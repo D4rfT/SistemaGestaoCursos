@@ -186,6 +186,35 @@
         }
       }
     },
+    "/api/Alunos/meus-dados": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlunoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlunoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlunoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alunos/ativar/{id}": {
       "patch": {
         "tags": [
@@ -753,6 +782,44 @@
         }
       }
     },
+    "/api/Matriculas/minhas-matriculas": {
+      "get": {
+        "tags": [
+          "Matriculas"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MatriculaDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MatriculaDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MatriculaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Matriculas/aluno/{id}": {
       "get": {
         "tags": [
@@ -889,6 +956,18 @@
               "format": "int32"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Migracao/alunos-para-usuarios": {
+      "post": {
+        "tags": [
+          "Migracao"
         ],
         "responses": {
           "200": {

@@ -4,6 +4,7 @@ using Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace SistemaGestaoCursos.Controllers
 {
@@ -20,6 +21,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult<List<MatriculaDto>>> GetAll()
         {
             var matriculas = await _mediator.Send(new GetAllMatriculasQuery());
@@ -27,13 +29,24 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult<MatriculaDto>> GetById(int id)
         {
             var matricula = await _mediator.Send(new GetMatriculaByIdQuery(id));
             return Ok(matricula);
         }
 
+        [HttpGet("minhas-matriculas")]
+        [Authorize(Roles = "Aluno")]
+        public async Task<ActionResult<List<MatriculaDto>>> GetMinhasMatriculas()
+        {
+            var alunoId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var matriculas = await _mediator.Send(new GetMatriculasPorAlunoQuery(alunoId));
+            return Ok(matriculas);
+        }
+
         [HttpGet("aluno/{id}")]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult<List<MatriculaDto>>> GetByAlunoId(int id)
         {
             var matriculas = await _mediator.Send(new GetMatriculasPorAlunoQuery(id));
@@ -41,6 +54,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpGet("curso/{id}")]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult<List<MatriculaDto>>> GetByCursoId(int id)
         {
             var matriculas = await _mediator.Send(new GetMatriculasPorCursoQuery(id));
@@ -48,6 +62,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult<MatriculaDto>> Create([FromBody] MatricularAlunoCommand command)
         {
             var matricula = await _mediator.Send(command);
@@ -55,6 +70,7 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPatch("ativar/{id}")]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult> Ativar(int id)
         {
             var result = await _mediator.Send(new ReativarMatriculaCommand(id));
@@ -62,10 +78,12 @@ namespace SistemaGestaoCursos.Controllers
         }
 
         [HttpPatch("desativar/{id}")]
+        [Authorize(Roles = "Secretaria,Administrador")]
         public async Task<ActionResult> Desativar(int id)
         {
             var result = await _mediator.Send(new DesativarMatriculaCommand(id));
             return Ok(new { message = "Matrícula desativada com sucesso", success = result });
         }
+
     }
 }
