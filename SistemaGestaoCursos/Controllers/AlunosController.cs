@@ -40,8 +40,8 @@ namespace SistemaGestaoCursos.Controllers
         [Authorize(Roles = "Aluno")]
         public async Task<ActionResult<AlunoDto>> GetMeusDados()
         {
-            var alunoId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            var aluno = await _mediator.Send(new GetAlunoByIdQuery(alunoId));
+            var usuarioId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var aluno = await _mediator.Send(new GetAlunoByUsuarioIdQuery(usuarioId));
             return Ok(aluno);
         }
 

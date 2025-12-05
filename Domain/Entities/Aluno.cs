@@ -17,7 +17,7 @@ namespace Domain.Entities
 
         private Aluno() { }
 
-        public Aluno(string nome, string cpf, string registroAcademico, string email, DateTime dataNascimento, int cursoId, int? usuarioId = null)
+        public Aluno(string nome, string cpf, string registroAcademico, string email, DateTime dataNascimento, int cursoId, int usuarioId)
         {
             Nome = nome ?? throw new ArgumentNullException(nameof(nome));
             CPF = ValidarCPF(cpf);
@@ -25,7 +25,7 @@ namespace Domain.Entities
             Email = ValidarEmail(email);
             DataNascimento = ValidarDataNascimento(dataNascimento);
             CursoId = cursoId > 0 ? cursoId : throw new ArgumentException("ID do curso inválido");
-            UsuarioId = usuarioId;
+            UsuarioId = usuarioId > 0 ? usuarioId : throw new ArgumentException("ID do usuário inválido");
             Ativo = true;
         }
 
@@ -71,15 +71,21 @@ namespace Domain.Entities
 
         private DateTime ValidarDataNascimento(DateTime dataNascimento)
         {
-            var idade = DateTime.UtcNow.Year - dataNascimento.Year;
+            var dataNascimentoUtc = dataNascimento.ToUniversalTime();
+            var hojeUtc = DateTime.UtcNow;
 
-            if (dataNascimento > DateTime.UtcNow)
+            if (dataNascimentoUtc > hojeUtc)
                 throw new ArgumentException("Data de nascimento não pode ser futura");
+
+            var idade = hojeUtc.Year - dataNascimentoUtc.Year;
+
+            if (hojeUtc < dataNascimentoUtc.AddYears(idade))
+                idade--;
 
             if (idade < 16)
                 throw new ArgumentException("Aluno deve ter pelo menos 16 anos");
 
-            return dataNascimento;
+            return dataNascimentoUtc;
         }
 
         public void AssociarUsuario(int usuarioId)

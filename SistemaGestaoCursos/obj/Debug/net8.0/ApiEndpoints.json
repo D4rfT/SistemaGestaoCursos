@@ -563,16 +563,6 @@
     ]
   },
   {
-    "ContainingType": "SistemaGestaoCursos.Controllers.MigracaoController",
-    "Method": "MigrarAlunosParaUsuarios",
-    "RelativePath": "api/Migracao/alunos-para-usuarios",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "SistemaGestaoCursos.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

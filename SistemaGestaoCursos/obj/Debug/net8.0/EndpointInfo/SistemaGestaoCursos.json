@@ -964,18 +964,6 @@
         }
       }
     },
-    "/api/Migracao/alunos-para-usuarios": {
-      "post": {
-        "tags": [
-          "Migracao"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/WeatherForecast": {
       "get": {
         "tags": [

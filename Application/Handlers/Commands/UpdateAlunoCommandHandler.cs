@@ -30,7 +30,7 @@ namespace Application.Handlers.Commands
             if (curso == null)
                 throw new KeyNotFoundException($"Curso com ID {request.CursoId} não encontrado");
 
-            aluno.AtualizarInformacoes(request.Nome, request.Email, request.DataNascimento);
+            aluno.AtualizarInformacoes(request.Nome, request.Email, request.DataNascimento.ToUniversalTime());
             aluno.TrocarCurso(request.CursoId);
 
             _unitOfWork.Alunos.Update(aluno);

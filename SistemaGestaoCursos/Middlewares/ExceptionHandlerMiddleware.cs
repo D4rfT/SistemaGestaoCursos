@@ -37,12 +37,29 @@ namespace SistemaGestaoCursos.Middleware
 
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
+            if (exception is Microsoft.EntityFrameworkCore.DbUpdateException dbUpdateEx)
+            {
+                if (dbUpdateEx.InnerException != null)
+                {
+                    _logger.LogError(dbUpdateEx.InnerException,
+                        "ERRO DE BANCO (possível transação): {Message}",
+                        dbUpdateEx.InnerException.Message);
+                }
+
+                if (exception.Message.Contains("transaction", StringComparison.OrdinalIgnoreCase))
+                {
+                    _logger.LogWarning("Possível transação pendente - verifique UnitOfWork");
+                }
+            }
+
             _logger.LogError(exception, "Erro não tratado capturado pelo middleware");
 
             context.Response.ContentType = "application/json";
 
             var (statusCode, message) = exception switch
             {
+                ValidationException => (HttpStatusCode.BadRequest, "Erro de validação"),
+
                 KeyNotFoundException e => (HttpStatusCode.NotFound, e.Message),
 
                 InvalidOperationException e => (HttpStatusCode.BadRequest, e.Message),
@@ -51,7 +68,7 @@ namespace SistemaGestaoCursos.Middleware
 
                 UnauthorizedAccessException e => (HttpStatusCode.Unauthorized, "Acesso não autorizado"),
 
-                _ => (HttpStatusCode.InternalServerError, _env.IsDevelopment()? exception.Message : "Ocorreu um erro interno. Tente novamente mais tarde.")
+                _ => (HttpStatusCode.InternalServerError, _env.IsDevelopment() ? exception.Message : "Ocorreu um erro interno. Tente novamente mais tarde.")
             };
 
             context.Response.StatusCode = (int)statusCode;
