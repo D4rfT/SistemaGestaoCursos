@@ -1,4 +1,3 @@
-using Microsoft.OpenApi.Models;
 using Application.Behaviors;
 using Application.Interfaces;
 using Application.Validations;
@@ -9,7 +8,12 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Context;
+using Serilog.Events;
 using SistemaGestaoCursos.Middleware;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -97,7 +101,30 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddAuthorization();
 
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .Enrich.WithProperty("Application", "SistemaGestaoCursos")
+    .Enrich.WithMachineName()
+    .Enrich.WithThreadId()
+    .WriteTo.Console(
+        outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
+    .WriteTo.File(
+        path: "logs/log-.txt",
+        rollingInterval: RollingInterval.Day,
+        retainedFileCountLimit: 7,
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
 var app = builder.Build();
+
+Log.Information("API SistemaGestaoCursos iniciando...");
+Log.Information("Ambiente: {Environment}", app.Environment.EnvironmentName);
+Log.Information("URLs: {Urls}", string.Join(", ", app.Urls));
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -111,6 +138,51 @@ app.UseHttpsRedirection();
 //ORDEM IMPORTANTE entre Autenticação e Autorização
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.Use(async (context, next) =>
+{
+    var correlationId = context.Request.Headers["X-Correlation-ID"].FirstOrDefault()
+                        ?? Guid.NewGuid().ToString();
+
+    using (LogContext.PushProperty("CorrelationId", correlationId))
+    {
+        context.Response.Headers["X-Correlation-ID"] = correlationId;
+        await next(context);
+    }
+});
+
+app.UseSerilogRequestLogging(options =>
+{
+    options.MessageTemplate = "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms";
+
+    options.GetLevel = (httpContext, elapsed, ex) =>
+    {
+        if (ex != null || httpContext.Response.StatusCode > 499)
+            return LogEventLevel.Error;
+
+        if (elapsed > 1000)
+            return LogEventLevel.Warning;
+
+        return LogEventLevel.Information;
+    };
+
+    options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+    {
+        diagnosticContext.Set("Host", httpContext.Request.Host.Value);
+        diagnosticContext.Set("Protocol", httpContext.Request.Protocol);
+
+        var userId = httpContext.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (!string.IsNullOrEmpty(userId))
+            diagnosticContext.Set("UserId", userId);
+
+        var userRole = httpContext.User?.FindFirst(ClaimTypes.Role)?.Value;
+
+        if (!string.IsNullOrEmpty(userRole))
+            diagnosticContext.Set("UserRole", userRole);
+
+        diagnosticContext.Set("RemoteIpAddress", httpContext.Connection.RemoteIpAddress?.ToString());
+    };
+});
 
 // Exception Handler Middleware SEMPRE depois de  UseAuthorization
 app.UseMiddleware<ExceptionHandlerMiddleware>();
