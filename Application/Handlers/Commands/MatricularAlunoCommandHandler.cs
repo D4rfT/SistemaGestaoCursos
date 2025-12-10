@@ -3,46 +3,92 @@ using Application.Interfaces;
 using Application.Models;
 using Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace Application.Handlers.Commands
 {
     public class MatricularAlunoCommandHandler : IRequestHandler<MatricularAlunoCommand, MatriculaDto>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger<MatricularAlunoCommandHandler> _logger;
 
-        public MatricularAlunoCommandHandler(IUnitOfWork unitOfWork)
+        public MatricularAlunoCommandHandler(IUnitOfWork unitOfWork, ILogger<MatricularAlunoCommandHandler> logger)
         {
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         public async Task<MatriculaDto> Handle(MatricularAlunoCommand request, CancellationToken cancellationToken)
         {
-            var aluno = await _unitOfWork.Alunos.GetByIdAsync(request.AlunoId, cancellationToken);
-            if (aluno == null)
-                throw new InvalidOperationException($"Aluno com ID {request.AlunoId} não encontrado");
+            _logger.LogInformation("Iniciando matrícula: AlunoId={AlunoId}, CursoId={CursoId}", request.AlunoId, request.CursoId);
 
-            var curso = await _unitOfWork.Cursos.GetByIdAsync(request.CursoId, cancellationToken);
-            if (curso == null)
-                throw new InvalidOperationException($"Curso com ID {request.CursoId} não encontrado");
+            var stopwatch = Stopwatch.StartNew();
 
-            if (!curso.Ativo)
-                throw new InvalidOperationException($"Curso {curso.Nome} está inativo e não aceita matrículas");
+            try
+            {
+                _logger.LogDebug("Validando aluno: AlunoId={AlunoId}", request.AlunoId);
+                var aluno = await _unitOfWork.Alunos.GetByIdAsync(request.AlunoId, cancellationToken);
+                if (aluno == null)
+                {
+                    _logger.LogWarning("Aluno não encontrado para matrícula: AlunoId={AlunoId}", request.AlunoId);
+                    throw new InvalidOperationException($"Aluno com ID {request.AlunoId} não encontrado");
+                }
 
-            var matriculaExistente = await _unitOfWork.Matriculas
-                .ExisteMatriculaAtivaAsync(request.AlunoId, request.CursoId, cancellationToken);
+                if (!aluno.Ativo)
+                {
+                    _logger.LogWarning("Tentativa de matricular aluno inativo: AlunoId={AlunoId}, Nome={Nome}",aluno.Id, aluno.Nome);
+                    throw new InvalidOperationException($"Aluno {aluno.Nome} está inativo");
+                }
 
-            if (matriculaExistente)
-                throw new InvalidOperationException($"Aluno já está matriculado no curso {curso.Nome}");
+                _logger.LogDebug("Validando curso: CursoId={CursoId}", request.CursoId);
+                var curso = await _unitOfWork.Cursos.GetByIdAsync(request.CursoId, cancellationToken);
 
-            var matricula = new Matricula(request.AlunoId, request.CursoId);
+                if (curso == null)
+                {
+                    _logger.LogWarning("Curso não encontrado para matrícula: CursoId={CursoId}", request.CursoId);
+                    throw new InvalidOperationException($"Curso com ID {request.CursoId} não encontrado");
+                }
 
-            await _unitOfWork.Matriculas.AddAsync(matricula);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+                if (!curso.Ativo)
+                {
+                    _logger.LogWarning("Tentativa de matrícula em curso inativo: CursoId={CursoId}, Nome={Nome}",curso.Id, curso.Nome);
+                    throw new InvalidOperationException($"Curso {curso.Nome} está inativo e não aceita matrículas");
+                }
 
-            var matriculaComDados = await _unitOfWork.Matriculas
-                .GetByIdAsync(matricula.Id, cancellationToken);
+                _logger.LogDebug("Verificando matrícula existente: AlunoId={AlunoId}, CursoId={CursoId}",request.AlunoId, request.CursoId);
+                var matriculaExistente = await _unitOfWork.Matriculas.ExisteMatriculaAtivaAsync(request.AlunoId, request.CursoId, cancellationToken);
 
-            return MapToDto(matriculaComDados);
+                if (matriculaExistente)
+                {
+                    _logger.LogWarning("Matrícula duplicada: AlunoId={AlunoId}, CursoId={CursoId}, Aluno={AlunoNome}, Curso={CursoNome}",request.AlunoId, request.CursoId, aluno.Nome, curso.Nome);
+                    throw new InvalidOperationException($"Aluno já está matriculado no curso {curso.Nome}");
+                }
+
+                _logger.LogDebug("Criando matrícula: Aluno={AlunoNome}, Curso={CursoNome}",aluno.Nome, curso.Nome);
+                var matricula = new Matricula(request.AlunoId, request.CursoId);
+
+                await _unitOfWork.Matriculas.AddAsync(matricula);
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+                stopwatch.Stop();
+
+                _logger.LogInformation("Matrícula realizada com sucesso: MatriculaId={MatriculaId}, Aluno={AlunoNome} (ID:{AlunoId}), Curso={CursoNome} (ID:{CursoId}), Tempo={Tempo}ms",
+                    matricula.Id, aluno.Nome, aluno.Id, curso.Nome, curso.Id, stopwatch.ElapsedMilliseconds);
+
+                var matriculaComDados = await _unitOfWork.Matriculas.GetByIdAsync(matricula.Id, cancellationToken);
+
+                return MapToDto(matriculaComDados);
+            }
+            catch (Exception ex)
+            {
+                stopwatch.Stop();
+
+                _logger.LogError(ex, "Erro ao realizar matrícula: AlunoId={AlunoId}, CursoId={CursoId}, TempoDecorrido={TempoDecorrido}ms",
+                    request.AlunoId, request.CursoId, stopwatch.ElapsedMilliseconds);
+
+                throw;
+            }
         }
 
         private MatriculaDto MapToDto(Matricula matricula)

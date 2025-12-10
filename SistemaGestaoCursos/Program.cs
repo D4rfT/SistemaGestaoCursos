@@ -8,11 +8,16 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Context;
 using Serilog.Events;
+using Serilog.Formatting.Json;
+using SistemaGestaoCursos.Extensions;
+using SistemaGestaoCursos.Filters;
 using SistemaGestaoCursos.Middleware;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Security.Claims;
 using System.Text;
 
@@ -71,52 +76,37 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddSwaggerGen(options =>
-{
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "Insira o token JWT no formato: Bearer {seu_token}"
-    });
-
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
-    });
-});
+builder.Services.AddCustomSwagger(builder.Configuration);
 
 builder.Services.AddAuthorization();
 
-Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Information()
-    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-    .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
+var loggerConfig = new LoggerConfiguration()
     .Enrich.FromLogContext()
     .Enrich.WithProperty("Application", "SistemaGestaoCursos")
     .Enrich.WithMachineName()
     .Enrich.WithThreadId()
-    .WriteTo.Console(
-        outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning);
+
+
+if (builder.Environment.IsDevelopment())
+{
+    loggerConfig.MinimumLevel.Debug().WriteTo.Console( outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{CorrelationId}] {Message:lj} {Properties:j}{NewLine}{Exception}");
+}
+else
+{
+    loggerConfig.MinimumLevel.Information().WriteTo.Console(new JsonFormatter());
+}
+
+loggerConfig
     .WriteTo.File(
         path: "logs/log-.txt",
         rollingInterval: RollingInterval.Day,
         retainedFileCountLimit: 7,
-        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
-    .CreateLogger();
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [{CorrelationId}] {Message:lj} {Properties:j}{NewLine}{Exception}");
+
+Log.Logger = loggerConfig.CreateLogger();
+
 
 builder.Host.UseSerilog();
 
@@ -141,8 +131,7 @@ app.UseAuthorization();
 
 app.Use(async (context, next) =>
 {
-    var correlationId = context.Request.Headers["X-Correlation-ID"].FirstOrDefault()
-                        ?? Guid.NewGuid().ToString();
+    var correlationId = context.Request.Headers["X-Correlation-ID"].FirstOrDefault() ?? Guid.NewGuid().ToString();
 
     using (LogContext.PushProperty("CorrelationId", correlationId))
     {
@@ -176,11 +165,13 @@ app.UseSerilogRequestLogging(options =>
             diagnosticContext.Set("UserId", userId);
 
         var userRole = httpContext.User?.FindFirst(ClaimTypes.Role)?.Value;
-
         if (!string.IsNullOrEmpty(userRole))
             diagnosticContext.Set("UserRole", userRole);
 
         diagnosticContext.Set("RemoteIpAddress", httpContext.Connection.RemoteIpAddress?.ToString());
+
+        diagnosticContext.Set("QueryString", httpContext.Request.QueryString.Value);
+        diagnosticContext.Set("ContentType", httpContext.Request.ContentType);
     };
 });
 
@@ -188,5 +179,6 @@ app.UseSerilogRequestLogging(options =>
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.MapControllers();
+
 
 app.Run();

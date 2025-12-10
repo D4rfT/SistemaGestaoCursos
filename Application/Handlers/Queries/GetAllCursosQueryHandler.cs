@@ -3,23 +3,61 @@ using Application.Models;
 using Application.Queries;
 using Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Handlers.Queries
 {
     public class GetAllCursosQueryHandler : IRequestHandler<GetAllCursosQuery, List<CursoDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger<GetAllCursosQueryHandler> _logger;
 
-        public GetAllCursosQueryHandler(IUnitOfWork unitOfWork)
+        public GetAllCursosQueryHandler(IUnitOfWork unitOfWork, ILogger<GetAllCursosQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         public async Task<List<CursoDto>> Handle(GetAllCursosQuery request, CancellationToken cancellationToken)
         {
-            var cursos = await _unitOfWork.Cursos.GetAllAsync(cancellationToken);
+            _logger.LogDebug("Iniciando consulta de todos os cursos");
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+            try
+            {
+                var cursos = await _unitOfWork.Cursos.GetAllAsync(cancellationToken);
 
-            return cursos.Select(MapToDto).ToList();
+                stopwatch.Stop();
+
+                _logger.LogInformation("Consulta de cursos concluída: TotalCursos={TotalCursos}, TempoExecucao={TempoExecucao}ms",cursos.Count(), stopwatch.ElapsedMilliseconds);
+
+                if (cursos.Count() == 0)
+                {
+                    _logger.LogWarning("Consulta de cursos retornou 0 resultados");
+                }
+                else
+                {
+                    _logger.LogDebug("Cursos encontrados: {@Cursos}",
+                        cursos.Select(c => new { c.Id, c.Nome, c.Ativo }).Take(5));
+
+     
+                    var cursosAtivos = cursos.Count(c => c.Ativo);
+                    var cursosInativos = cursos.Count(c => !c.Ativo);
+
+                    _logger.LogDebug("Estatísticas: Ativos={Ativos}, Inativos={Inativos}",cursosAtivos, cursosInativos);
+                }
+
+                return cursos.Select(MapToDto).ToList();
+            }
+            catch (Exception ex)
+            {
+                stopwatch.Stop();
+
+                _logger.LogError(ex,
+                    "Erro ao consultar cursos: TempoDecorrido={TempoDecorrido}ms",
+                    stopwatch.ElapsedMilliseconds);
+
+                throw;
+            }
         }
 
         private CursoDto MapToDto(Curso curso)

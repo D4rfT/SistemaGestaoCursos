@@ -1,14 +1,30 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "SistemaGestaoCursos",
-    "version": "1.0"
+    "title": "Sistema Gestão Cursos API",
+    "description": "API para gerenciamento de cursos, alunos e matrículas",
+    "contact": {
+      "name": "Suporte",
+      "email": "suporte@sistemacursos.com"
+    },
+    "version": "v1"
   },
   "paths": {
     "/api/Alunos": {
       "get": {
         "tags": [
           "Alunos"
+        ],
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "5a1fa0d3-e15a-4fee-b0b2-f01338e849d4"
+          }
         ],
         "responses": {
           "200": {
@@ -45,6 +61,17 @@
       "post": {
         "tags": [
           "Alunos"
+        ],
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "5a3f245d-0e3f-4c48-8b8f-a7dd62e09803"
+          }
         ],
         "requestBody": {
           "content": {
@@ -103,6 +130,15 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "e9a84526-a5a7-4a8b-aff3-2843c135b02f"
           }
         ],
         "responses": {
@@ -141,6 +177,15 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "076aff24-3b81-48f1-887f-43bf443190cb"
           }
         ],
         "requestBody": {
@@ -191,6 +236,17 @@
         "tags": [
           "Alunos"
         ],
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "a60a019b-afab-4cfd-9f03-3456852fcd16"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -215,87 +271,21 @@
         }
       }
     },
-    "/api/Alunos/ativar/{id}": {
-      "patch": {
-        "tags": [
-          "Alunos"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Alunos/desativar/{id}": {
-      "patch": {
-        "tags": [
-          "Alunos"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Autenticacao/login": {
-      "post": {
-        "tags": [
-          "Autenticacao"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Cursos": {
       "get": {
         "tags": [
           "Cursos"
+        ],
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "88c1cee5-0101-4569-9be8-de6158592a75"
+          }
         ],
         "responses": {
           "200": {
@@ -333,6 +323,17 @@
         "tags": [
           "Cursos"
         ],
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "3adb4ea3-5176-4d79-b367-c92fb1f4384d"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -376,10 +377,136 @@
         }
       }
     },
+    "/api/Cursos/{id}": {
+      "get": {
+        "tags": [
+          "Cursos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "c4a270ad-ef9f-463e-b9b5-8a0f10928cf8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Cursos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "93db8763-d73a-4e2b-abdc-36397bf4ab80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCursoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCursoCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCursoCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CursoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Cursos/ativos": {
       "get": {
         "tags": [
           "Cursos"
+        ],
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "d9bbbd55-12f4-460d-bfcf-94cfcd703629"
+          }
         ],
         "responses": {
           "200": {
@@ -480,180 +607,46 @@
               "type": "boolean",
               "default": false
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CursoDto"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CursoDto"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CursoDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Cursos/{id}": {
-      "get": {
-        "tags": [
-          "Cursos"
-        ],
-        "parameters": [
+          },
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
             "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/CursoDto"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CursoDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CursoDto"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Cursos"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateCursoCommand"
-              }
+              "type": "string"
             },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateCursoCommand"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateCursoCommand"
-              }
-            }
+            "example": "0c6becd6-9255-4821-9d61-f4c0d9246111"
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CursoDto"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CursoDto"
+                  }
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CursoDto"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CursoDto"
+                  }
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CursoDto"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CursoDto"
+                  }
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/Cursos/ativar/{id}": {
-      "patch": {
-        "tags": [
-          "Cursos"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Cursos/desativar/{id}": {
-      "patch": {
-        "tags": [
-          "Cursos"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -662,6 +655,17 @@
       "get": {
         "tags": [
           "Matriculas"
+        ],
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "25652e42-bbdf-4d00-a4db-773c7f08e77e"
+          }
         ],
         "responses": {
           "200": {
@@ -698,6 +702,17 @@
       "post": {
         "tags": [
           "Matriculas"
+        ],
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2051040d-8523-4196-9f2d-513c8b373d7a"
+          }
         ],
         "requestBody": {
           "content": {
@@ -756,6 +771,15 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "de0bb3b7-17cc-4d28-8545-53f917f74a6a"
           }
         ],
         "responses": {
@@ -775,44 +799,6 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MatriculaDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Matriculas/minhas-matriculas": {
-      "get": {
-        "tags": [
-          "Matriculas"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MatriculaDto"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MatriculaDto"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MatriculaDto"
-                  }
                 }
               }
             }
@@ -834,6 +820,15 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "0baff77f-96ed-471b-a508-bf1c4cee5a7d"
           }
         ],
         "responses": {
@@ -883,6 +878,15 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "9ba6a745-93f8-43bd-b2f8-17383a432e13"
           }
         ],
         "responses": {
@@ -918,6 +922,233 @@
         }
       }
     },
+    "/api/Matriculas/minhas-matriculas": {
+      "get": {
+        "tags": [
+          "Matriculas"
+        ],
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "0353d7b0-04c2-4feb-8953-3aa3dd90570c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MatriculaDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MatriculaDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MatriculaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "b61b37f6-0f78-479c-b205-a0200c1b1491"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Alunos/ativar/{id}": {
+      "patch": {
+        "tags": [
+          "Alunos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "c882702d-fbc5-4dd9-a1f0-4bc5f9b3b1e9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Alunos/desativar/{id}": {
+      "patch": {
+        "tags": [
+          "Alunos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "950680fe-05c1-4ecd-aba2-9aaa83870fc0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Cursos/ativar/{id}": {
+      "patch": {
+        "tags": [
+          "Cursos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "31bd2457-6c1d-4a67-82a3-6f6bca9254f9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Cursos/desativar/{id}": {
+      "patch": {
+        "tags": [
+          "Cursos"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "14d70b1a-0b98-44a5-9325-dc5131ee75fd"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Matriculas/ativar/{id}": {
       "patch": {
         "tags": [
@@ -932,6 +1163,15 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "5ae1eba0-f944-4f04-9cb0-88d57ac66c6e"
           }
         ],
         "responses": {
@@ -955,6 +1195,15 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "5e486ccf-98be-40f3-921e-62e7fbd2adc3"
           }
         ],
         "responses": {
@@ -964,41 +1213,44 @@
         }
       }
     },
-    "/WeatherForecast": {
-      "get": {
+    "/api/Autenticacao/login": {
+      "post": {
         "tags": [
-          "WeatherForecast"
+          "Autenticacao"
         ],
-        "operationId": "GetWeatherForecast",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
+        "parameters": [
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "ID único para rastreamento da requisição. Se não fornecido, será gerado automaticamente.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "34e9dc80-f0d1-4f04-9fb6-2b3e67be8fa2"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
               }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
