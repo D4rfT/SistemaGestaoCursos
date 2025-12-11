@@ -3,32 +3,53 @@ using Application.Interfaces;
 using Application.Models;
 using Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace Application.Handlers.Commands
 {
     public class UpdateCursoCommandHandler : IRequestHandler<UpdateCursoCommand, CursoDto>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger<UpdateCursoCommandHandler> _logger;
 
-        public UpdateCursoCommandHandler(IUnitOfWork unitOfWork)
+        public UpdateCursoCommandHandler(IUnitOfWork unitOfWork, ILogger<UpdateCursoCommandHandler> logger)
         {
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         public async Task<CursoDto> Handle(UpdateCursoCommand request, CancellationToken cancellationToken)
         {
-            var curso = await _unitOfWork.Cursos.GetByIdAsync(request.Id, cancellationToken);
-            if (curso == null)
-                throw new InvalidOperationException($"Curso com ID {request.Id} não encontrado");
+            _logger.LogInformation("Atualizando Curso ID={CursoId}", request.Id);
+            var stopwatch = Stopwatch.StartNew();
 
-            curso.AtualizarInformacoes(request.Nome, request.Descricao, request.Preco, request.Duracao);
+            try
+            {
+                var curso = await _unitOfWork.Cursos.GetByIdAsync(request.Id, cancellationToken);
+                if (curso == null)
+                {
+                    _logger.LogWarning("Curso não encontrado para atualização: ID={CursoId}", request.Id);
+                    throw new InvalidOperationException($"Curso com ID {request.Id} não encontrado");
+                }
 
-            _unitOfWork.Cursos.Update(curso);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+                curso.AtualizarInformacoes(request.Nome, request.Descricao, request.Preco, request.Duracao);
 
-            var cursoAtualizado = await _unitOfWork.Cursos.GetByIdAsync(request.Id, cancellationToken);
+                _unitOfWork.Cursos.Update(curso);
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return MapToDto(cursoAtualizado);
+                stopwatch.Stop();
+                _logger.LogInformation("Curso atualizado: ID={CursoId}, Tempo={Tempo}ms", request.Id, stopwatch.ElapsedMilliseconds);
+                var cursoAtualizado = await _unitOfWork.Cursos.GetByIdAsync(request.Id, cancellationToken);
+
+                return MapToDto(cursoAtualizado);
+            }
+            catch (Exception ex)
+            {
+                stopwatch.Stop();
+                _logger.LogError(ex, "Erro ao atualizar curso: ID={CursoId}, Tempo={Tempo}ms", request.Id, stopwatch.ElapsedMilliseconds);
+                throw;
+            }
         }
 
         private CursoDto MapToDto(Curso curso)

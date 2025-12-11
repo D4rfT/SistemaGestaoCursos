@@ -38,10 +38,8 @@ namespace Application.Handlers.Commands
                 _logger.LogDebug("Criando entidade Curso: Nome={Nome}", request.Nome);
                 var novoCurso = new Curso(request.Nome, request.Descricao, request.Preco, request.Duracao);
 
-                _logger.LogDebug("Adicionando curso ao repositório");
-                await _unitOfWork.Cursos.AddAsync(novoCurso, cancellationToken);
 
-                _logger.LogDebug("Salvando alterações no banco");
+                await _unitOfWork.Cursos.AddAsync(novoCurso, cancellationToken);
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
 
                 stopwatch.Stop();

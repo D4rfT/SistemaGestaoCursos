@@ -4,6 +4,7 @@ using Application.Queries;
 using Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace Application.Handlers.Queries
 {
@@ -21,7 +22,8 @@ namespace Application.Handlers.Queries
         public async Task<List<CursoDto>> Handle(GetAllCursosQuery request, CancellationToken cancellationToken)
         {
             _logger.LogDebug("Iniciando consulta de todos os cursos");
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+            var stopwatch = Stopwatch.StartNew();
+
             try
             {
                 var cursos = await _unitOfWork.Cursos.GetAllAsync(cancellationToken);
@@ -36,8 +38,7 @@ namespace Application.Handlers.Queries
                 }
                 else
                 {
-                    _logger.LogDebug("Cursos encontrados: {@Cursos}",
-                        cursos.Select(c => new { c.Id, c.Nome, c.Ativo }).Take(5));
+                    _logger.LogDebug("Cursos encontrados: {@Cursos}", cursos.Select(c => new { c.Id, c.Nome, c.Ativo }).Take(5));
 
      
                     var cursosAtivos = cursos.Count(c => c.Ativo);
