@@ -3,23 +3,43 @@ using Application.Models;
 using Application.Queries;
 using Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace Application.Handlers.Queries
 {
     public class GetMatriculasPorCursoQueryHandler : IRequestHandler<GetMatriculasPorCursoQuery, List<MatriculaDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger<GetMatriculasPorCursoQueryHandler> _logger;
 
-        public GetMatriculasPorCursoQueryHandler(IUnitOfWork unitOfWork)
+        public GetMatriculasPorCursoQueryHandler(IUnitOfWork unitOfWork, ILogger<GetMatriculasPorCursoQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         public async Task<List<MatriculaDto>> Handle(GetMatriculasPorCursoQuery request, CancellationToken cancellationToken)
         {
-            var matriculas = await _unitOfWork.Matriculas.GetMatriculasPorCursoAsync(request.Id, cancellationToken);
+            _logger.LogInformation("Consultado matrícula por curso");
+            var stopwatch = Stopwatch.StartNew();
 
-            return matriculas.Select(MapToDto).ToList();
+            try
+            {
+                var matriculas = await _unitOfWork.Matriculas.GetMatriculasPorCursoAsync(request.Id, cancellationToken);
+                stopwatch.Stop();
+
+                _logger.LogInformation($"Foram encontradas {matriculas.Count()} matrículas nesse curso");
+
+                return matriculas.Select(MapToDto).ToList();
+            }
+            catch (Exception ex)
+            {
+                stopwatch.Stop();
+                _logger.LogInformation(ex, $"Erro ao consultar matrícula por curso");
+
+                throw;
+            }
         }
 
         private MatriculaDto MapToDto(Matricula matricula)

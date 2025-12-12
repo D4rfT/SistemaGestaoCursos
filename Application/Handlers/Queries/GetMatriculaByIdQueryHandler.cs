@@ -4,26 +4,49 @@ using Application.Queries;
 using Domain.Entities;
 using MediatR;
 using System.Threading;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace Application.Handlers.Queries
 {
     public class GetMatriculaByIdQueryHandler : IRequestHandler<GetMatriculaByIdQuery, MatriculaDto>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger<GetMatriculaByIdQueryHandler> _logger;
 
-        public GetMatriculaByIdQueryHandler(IUnitOfWork unitOfWork)
+        public GetMatriculaByIdQueryHandler(IUnitOfWork unitOfWork, ILogger<GetMatriculaByIdQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         public async Task<MatriculaDto> Handle(GetMatriculaByIdQuery request, CancellationToken cancellationToken)
         {
-            var matricula = await _unitOfWork.Matriculas.GetByIdAsync(request.Id, cancellationToken);
+            _logger.LogInformation($"Consultado Matrícula ID {request.Id}");
+            var stopwatch = Stopwatch.StartNew();
 
-            if (matricula == null)
-                throw new KeyNotFoundException($"Matrícula com ID {request.Id} não encontrada");
+            try
+            {
+                var matricula = await _unitOfWork.Matriculas.GetByIdAsync(request.Id, cancellationToken);
+                stopwatch.Stop();
 
-            return MapToDto(matricula);
+                if (matricula == null)
+                {
+                    _logger.LogDebug($"Matrícula com ID {request.Id} não encontrada");
+                    throw new KeyNotFoundException($"Matrícula com ID {request.Id} não encontrada");
+                }
+
+                _logger.LogInformation($"Matrícula ID {request.Id} encontrada.");
+
+                return MapToDto(matricula);
+            }
+            catch (Exception ex)
+            {
+                stopwatch.Stop();
+                _logger.LogInformation(ex, $"Erro ao consultar o ID {request.Id}");
+
+                throw;
+            }
         }
 
         private MatriculaDto MapToDto(Matricula matricula)

@@ -2,28 +2,50 @@
 using Application.Models;
 using Application.Queries;
 using MediatR;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace Application.Handlers.Queries
 {
     public class GetAlunoByUsuarioIdQueryHandler : IRequestHandler<GetAlunoByUsuarioIdQuery, AlunoDto>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger<GetAlunoByIdQueryHandler> _logger;
 
-        public GetAlunoByUsuarioIdQueryHandler(IUnitOfWork unitOfWork)
+        public GetAlunoByUsuarioIdQueryHandler(IUnitOfWork unitOfWork, ILogger<GetAlunoByIdQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         public async Task<AlunoDto> Handle(GetAlunoByUsuarioIdQuery request, CancellationToken cancellationToken)
         {
-            var aluno = await _unitOfWork.Alunos
-                .FindAsync(a => a.UsuarioId == request.UsuarioId, cancellationToken)
-                .ContinueWith(task => task.Result.FirstOrDefault());
+            _logger.LogInformation($"Consultado aluno por usuário");
+            var stopwatch = Stopwatch.StartNew();
 
-            if (aluno == null)
-                throw new KeyNotFoundException($"Aluno não encontrado para o usuário ID {request.UsuarioId}");
+            try
+            {
+                var aluno = await _unitOfWork.Alunos.FindAsync(a => a.UsuarioId == request.UsuarioId, cancellationToken).ContinueWith(task => task.Result.FirstOrDefault());
+                stopwatch.Stop();
 
-            return MapToDto(aluno);
+                if (aluno == null)
+                {
+                    _logger.LogDebug($"Aluno não encontrado para o usuário ID {request.UsuarioId}");
+                    throw new KeyNotFoundException($"Aluno não encontrado para o usuário ID {request.UsuarioId}");
+                }
+
+                _logger.LogInformation($"Aluno ID {aluno.Id} encontrado para o usuário ID {request.UsuarioId}. Nome: {aluno.Nome} CPF: {aluno.CPF}, Email: {aluno.Email}, Ativo: {aluno.Ativo}");
+
+                return MapToDto(aluno);
+
+            }
+            catch (Exception ex)
+            {
+                stopwatch.Stop();
+                _logger.LogInformation(ex, $"Erro ao consultar o ID {request.UsuarioId}");
+
+                throw;
+            }
         }
 
         private AlunoDto MapToDto(Domain.Entities.Aluno aluno)
