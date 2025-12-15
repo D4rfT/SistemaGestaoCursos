@@ -42,6 +42,14 @@ namespace Application.Handlers.Commands
 
                 return true;
             }
+            catch (Exception ex)
+            {
+                stopwatch.Stop();
+
+                _logger.LogError(ex, $"Erro ao desativar o curso: CursoId={request.Id}, TempoDecorrido={stopwatch.ElapsedMilliseconds}ms");
+
+                throw;
+            }
         }
     }
 }
