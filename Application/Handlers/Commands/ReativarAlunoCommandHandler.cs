@@ -20,7 +20,7 @@ namespace Application.Handlers.Commands
 
         public async Task<bool> Handle(ReativarAlunoCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Reativando aluno ID={AlunoID}", request.Id);
+            _logger.LogInformation($"Reativando aluno ID={request.Id}");
             var stopwatch = Stopwatch.StartNew();
             
             try
@@ -28,13 +28,13 @@ namespace Application.Handlers.Commands
                 var aluno = await _unitOfWork.Alunos.GetByIdAsync(request.Id, cancellationToken);
                 if (aluno == null)
                 {
-                    _logger.LogDebug("Aluno ID {AlunoID} não foi encontrado.", request.Id);
+                    _logger.LogDebug($"Aluno ID {request.Id} não foi encontrado.");
                     throw new InvalidOperationException($"Não existe Aluno com o id {request.Id}");
                 }
 
                 if (aluno.Ativo)
                 {
-                    _logger.LogDebug("Aluno ID {AlunoID} já está ativo.", request.Id);
+                    _logger.LogDebug($"Aluno ID {request.Id} já está ativo.");
                     throw new InvalidOperationException($"O Aluno do id {request.Id} já está ativo");
                 }
 
@@ -42,7 +42,7 @@ namespace Application.Handlers.Commands
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
 
                 stopwatch.Stop();
-                _logger.LogInformation("Aluno ID {AlunoID} foi ativado.", request.Id);
+                _logger.LogInformation($"Aluno ID {request.Id} foi ativado.");
 
                 return true;
             }
@@ -50,7 +50,7 @@ namespace Application.Handlers.Commands
             {
                 stopwatch.Stop();
 
-                _logger.LogError(ex, "Erro ao ativar o aluno: AlunoId={AlunoId}, TempoDecorrido={TempoDecorrido}ms", request.Id, stopwatch.ElapsedMilliseconds);
+                _logger.LogError(ex, $"Erro ao ativar o aluno: AlunoId={request.Id}, TempoDecorrido={stopwatch.ElapsedMilliseconds}ms");
 
                 throw;
             }

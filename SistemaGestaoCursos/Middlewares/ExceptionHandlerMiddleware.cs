@@ -12,10 +12,7 @@ namespace SistemaGestaoCursos.Middleware
         private readonly ILogger<ExceptionHandlerMiddleware> _logger;
         private readonly IWebHostEnvironment _env;
 
-        public ExceptionHandlerMiddleware(
-            RequestDelegate next,
-            ILogger<ExceptionHandlerMiddleware> logger,
-            IWebHostEnvironment env)
+        public ExceptionHandlerMiddleware( RequestDelegate next, ILogger<ExceptionHandlerMiddleware> logger, IWebHostEnvironment env)
         {
             _next = next;
             _logger = logger;
@@ -73,9 +70,7 @@ namespace SistemaGestaoCursos.Middleware
 
             context.Response.StatusCode = (int)statusCode;
 
-            var errors = exception is ValidationException validationEx
-                ? validationEx.Errors.Select(e => e.ErrorMessage).ToList()
-                : null;
+            var errors = exception is ValidationException validationEx ? validationEx.Errors.Select(e => e.ErrorMessage).ToList(): null;
 
             var response = new
             {

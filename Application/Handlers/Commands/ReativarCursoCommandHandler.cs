@@ -10,9 +10,9 @@ namespace Application.Handlers.Commands
     public class ReativarCursoCommandHandler : IRequestHandler<ReativarCursoCommand, bool>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<ReativarAlunoCommandHandler> _logger;
+        private readonly ILogger<ReativarCursoCommandHandler> _logger;
 
-        public ReativarCursoCommandHandler(IUnitOfWork unitOfWork, ILogger<ReativarAlunoCommandHandler> logger)
+        public ReativarCursoCommandHandler(IUnitOfWork unitOfWork, ILogger<ReativarCursoCommandHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
@@ -20,7 +20,7 @@ namespace Application.Handlers.Commands
 
         public async Task<bool> Handle(ReativarCursoCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Reativando curso ID={CursoID}", request.Id);
+            _logger.LogInformation($"Reativando curso ID={request.Id}");
             var stopwatch = Stopwatch.StartNew();
             
             try
@@ -28,13 +28,13 @@ namespace Application.Handlers.Commands
                 var curso = await _unitOfWork.Cursos.GetByIdAsync(request.Id, cancellationToken);
                 if (curso == null)
                 {
-                    _logger.LogDebug("Curso ID {CursoId} não foi encontrando", request.Id);
+                    _logger.LogDebug($"Curso ID {request.Id} não foi encontrando");
                     throw new InvalidOperationException($"Não existe nenhum curso com o id'{request.Id}'");
                 }
 
                 if (curso.Ativo)
                 {
-                    _logger.LogDebug("Curso ID {CursoId} já está ativo.");
+                    _logger.LogDebug($"Curso ID {request.Id} já está ativo.");
                     throw new InvalidOperationException($"O Curso {curso.Nome} já está ativo.");
                 }
 
@@ -42,7 +42,7 @@ namespace Application.Handlers.Commands
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
 
                 stopwatch.Stop();
-                _logger.LogInformation("Curso ID {AlunoID} foi ativado.", request.Id);
+                _logger.LogInformation($"Curso ID {request.Id} foi ativado.");
 
                 return true;
             }
@@ -50,7 +50,7 @@ namespace Application.Handlers.Commands
             {
                 stopwatch.Stop();
 
-                _logger.LogError(ex, "Erro ao ativar o aluno: CursoId={AlunoId}, TempoDecorrido={TempoDecorrido}ms", request.Id, stopwatch.ElapsedMilliseconds);
+                _logger.LogError(ex, $"Erro ao ativar o aluno: CursoId={request.Id}, TempoDecorrido={stopwatch.ElapsedMilliseconds}ms");
 
                 throw;
             }

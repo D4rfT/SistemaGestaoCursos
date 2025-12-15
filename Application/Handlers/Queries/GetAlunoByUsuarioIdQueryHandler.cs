@@ -10,9 +10,9 @@ namespace Application.Handlers.Queries
     public class GetAlunoByUsuarioIdQueryHandler : IRequestHandler<GetAlunoByUsuarioIdQuery, AlunoDto>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<GetAlunoByIdQueryHandler> _logger;
+        private readonly ILogger<GetAlunoByUsuarioIdQueryHandler> _logger;
 
-        public GetAlunoByUsuarioIdQueryHandler(IUnitOfWork unitOfWork, ILogger<GetAlunoByIdQueryHandler> logger)
+        public GetAlunoByUsuarioIdQueryHandler(IUnitOfWork unitOfWork, ILogger<GetAlunoByUsuarioIdQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;

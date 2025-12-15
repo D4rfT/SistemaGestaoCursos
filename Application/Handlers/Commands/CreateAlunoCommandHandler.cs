@@ -21,30 +21,30 @@ namespace Application.Handlers.Commands
 
         public async Task<AlunoDto> Handle(CreateAlunoCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Iniciando criação de aluno: Nome={Nome}, Email={Email}, CPF={CPF}, CursoId={CursoId}", request.Nome, request.Email, request.CPF, request.CursoId);
+            _logger.LogInformation($"Iniciando criação de aluno: Nome={request.Nome}, Email={request.Email}, CPF={request.CPF}, CursoId={request.CursoId}");
             var stopwatch = Stopwatch.StartNew();
 
-            _logger.LogDebug("Verificando se aluno com CPF {CPF} já existe", request.CPF);
+            _logger.LogDebug($"Verificando se aluno com CPF {request.CPF} já existe");
             var cpfExistente = await _unitOfWork.Alunos.VerificarCpfExistenteAsync(request.CPF, cancellationToken: cancellationToken);
             if (cpfExistente)
             {
-                _logger.LogWarning("Tentativa de criar aluno com CPF já existente: {CPF}", request.CPF);
+                _logger.LogWarning($"Tentativa de criar aluno com CPF já existente: {request.CPF}");
                 throw new InvalidOperationException($"Já existe um aluno com o CPF {request.CPF}");
             }
 
-            _logger.LogDebug("Verificando se aluno com Email {email} já existe", request.Email);
+            _logger.LogDebug($"Verificando se aluno com Email {request.Email} já existe");
             var emailExistente = await _unitOfWork.Alunos.VerificarEmailExistenteAsync(request.Email, cancellationToken: cancellationToken);
             if (emailExistente)
             {
-                _logger.LogWarning("Tentativa de criar aluno com Email já existente: {Email}", request.Email);
+                _logger.LogWarning($"Tentativa de criar aluno com Email já existente: {request.Email}");
                 throw new InvalidOperationException($"Já existe um aluno com o email {request.Email}");
             }
 
-            _logger.LogDebug("Verificando se Curso com ID {CursoId} já existe", request.CursoId);
+            _logger.LogDebug($"Verificando se Curso com ID {request.CursoId} já existe");
             var curso = await _unitOfWork.Cursos.GetByIdAsync(request.CursoId, cancellationToken);
             if (curso == null)
             {
-                _logger.LogError("Curso não encontrado para criação de aluno: CursoId={CursoId}", request.CursoId);
+                _logger.LogError($"Curso não encontrado para criação de aluno: CursoId={request.CursoId}");
                 throw new InvalidOperationException($"Curso com ID {request.CursoId} não encontrado");
             }
 
@@ -53,7 +53,7 @@ namespace Application.Handlers.Commands
 
             try
             {
-                _logger.LogDebug("Criando usuário para aluno: Email={Email}", request.Email);
+                _logger.LogDebug($"Criando usuário para aluno: Email={request.Email}");
                 var usuario = new Usuario(request.Nome, request.Email, request.CPF, "Aluno");
                 await _unitOfWork.Usuarios.AddAsync(usuario, cancellationToken);
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
@@ -77,7 +77,7 @@ namespace Application.Handlers.Commands
                 await _unitOfWork.CommitTransactionAsync();
                 stopwatch.Stop();
 
-                _logger.LogInformation("Aluno criado com sucesso: AlunoId={AlunoId}, RA={RegistroAcademico}, UsuarioId={UsuarioId}, Tempo={Tempo}ms", novoAluno.Id, registroAcademico, usuario.Id, stopwatch.ElapsedMilliseconds);
+                _logger.LogInformation($"Aluno criado com sucesso: AlunoId={novoAluno.Id}, RA={registroAcademico}, UsuarioId={usuario.Id}, Tempo={stopwatch.ElapsedMilliseconds}ms");
                 var alunoCriado = await _unitOfWork.Alunos.GetByIdAsync(novoAluno.Id, cancellationToken);
                 return MapToDto(alunoCriado);
             }
@@ -85,7 +85,7 @@ namespace Application.Handlers.Commands
             catch (Exception ex)
             {
                 stopwatch.Stop();
-                _logger.LogError(ex, "Erro ao criar aluno: Nome={Nome}, Email={Email}, CPF={CPF}, Tempo={Tempo}ms. Rollback será executado.", request.Nome, request.Email, request.CPF, stopwatch.ElapsedMilliseconds);
+                _logger.LogError(ex, $"Erro ao criar aluno: Nome={request.Nome}, Email={request.Email}, CPF={request.CPF}, Tempo={stopwatch.ElapsedMilliseconds}ms. Rollback será executado.");
                 await _unitOfWork.RollbackTransactionAsync();
                 throw;
             }
@@ -101,18 +101,18 @@ namespace Application.Handlers.Commands
             {
                 tentativas++;
                 ra = $"RA{DateTime.Now:yyyyMMddHHmmssfff}";
-                _logger.LogTrace("Tentativa {Tentativa} de gerar RA único: {RA}", tentativas, ra);
+                _logger.LogTrace($"Tentativa {tentativas} de gerar RA único: {ra}");
             }
 
             while (await _unitOfWork.Alunos.GetByRegistroAcademicoAsync(ra, cancellationToken) != null && tentativas < 5);
 
             if (tentativas >= 5)
             {
-                _logger.LogError("Falha ao gerar RA único após {Tentativas} tentativas", tentativas);
+                _logger.LogError($"Falha ao gerar RA único após {tentativas} tentativas");
                 throw new InvalidOperationException("Não foi possível gerar um registro acadêmico único");
             }
 
-            _logger.LogDebug("RA único gerado após {Tentativas} tentativas: {RA}", tentativas, ra);
+            _logger.LogDebug($"RA único gerado após {tentativas} tentativas: {ra}");
             return ra;
         }
 

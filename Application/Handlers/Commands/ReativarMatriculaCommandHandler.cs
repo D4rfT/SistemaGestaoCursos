@@ -1,5 +1,6 @@
 ﻿using Application.Commands;
 using Application.Interfaces;
+using AutoMapper.Internal;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
@@ -19,7 +20,7 @@ namespace Application.Handlers.Commands
 
         public async Task<bool> Handle(ReativarMatriculaCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Reativando matrícula ID={AlunoID}", request.Id);
+            _logger.LogInformation($"Reativando matrícula ID={request.Id}");
             var stopwatch = Stopwatch.StartNew();
             try
             {
@@ -27,13 +28,13 @@ namespace Application.Handlers.Commands
                 var matricula = await _unitOfWork.Matriculas.GetByIdAsync(request.Id, cancellationToken);
                 if (matricula == null)
                 {
-                    _logger.LogDebug("Matrícula ID {MatriculaId} não foi encontranda", request.Id);
+                    _logger.LogDebug($"Matrícula ID {request.Id} não foi encontranda");
                     throw new InvalidOperationException($"Não existe nenhuma matrícula com o id'{request.Id}'");
                 }
 
                 if (matricula.Ativa)
                 {
-                    _logger.LogDebug("Matrícula ID {MatriculaId} já está ativa.", request.Id);
+                    _logger.LogDebug($"Matrícula ID {request.Id} já está ativa.");
                     throw new InvalidOperationException($"A matrícula do id {request.Id} já está ativa.");
                 }
 
@@ -41,7 +42,7 @@ namespace Application.Handlers.Commands
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
 
                 stopwatch.Stop();
-                _logger.LogInformation("Matrícula ID {MatriculaID} foi ativada.", request.Id);
+                _logger.LogInformation($"Matrícula ID {request.Id} foi ativada.");
 
                 return true;
             }
@@ -50,7 +51,7 @@ namespace Application.Handlers.Commands
             {
                 stopwatch.Stop();
 
-                _logger.LogError(ex, "Erro ao ativar a matrícula: MatrículaId={MatriculaId}, TempoDecorrido={TempoDecorrido}ms", request.Id, stopwatch.ElapsedMilliseconds);
+                _logger.LogError(ex, $"Erro ao ativar a matrícula: MatrículaId={request.Id}, TempoDecorrido={stopwatch.ElapsedMilliseconds}ms");
 
                 throw;
             }

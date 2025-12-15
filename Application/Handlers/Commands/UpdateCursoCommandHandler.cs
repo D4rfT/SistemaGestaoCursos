@@ -21,7 +21,7 @@ namespace Application.Handlers.Commands
 
         public async Task<CursoDto> Handle(UpdateCursoCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Atualizando Curso ID={CursoId}", request.Id);
+            _logger.LogInformation($"Atualizando Curso ID={request.Id}");
             var stopwatch = Stopwatch.StartNew();
 
             try
@@ -29,7 +29,7 @@ namespace Application.Handlers.Commands
                 var curso = await _unitOfWork.Cursos.GetByIdAsync(request.Id, cancellationToken);
                 if (curso == null)
                 {
-                    _logger.LogWarning("Curso não encontrado para atualização: ID={CursoId}", request.Id);
+                    _logger.LogWarning($"Curso não encontrado para atualização: ID={request.Id}");
                     throw new InvalidOperationException($"Curso com ID {request.Id} não encontrado");
                 }
 
@@ -39,7 +39,7 @@ namespace Application.Handlers.Commands
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
 
                 stopwatch.Stop();
-                _logger.LogInformation("Curso atualizado: ID={CursoId}, Tempo={Tempo}ms", request.Id, stopwatch.ElapsedMilliseconds);
+                _logger.LogInformation($"Curso atualizado: ID={request.Id}, Tempo={stopwatch.ElapsedMilliseconds}ms");
                 var cursoAtualizado = await _unitOfWork.Cursos.GetByIdAsync(request.Id, cancellationToken);
 
                 return MapToDto(cursoAtualizado);
@@ -47,7 +47,7 @@ namespace Application.Handlers.Commands
             catch (Exception ex)
             {
                 stopwatch.Stop();
-                _logger.LogError(ex, "Erro ao atualizar curso: ID={CursoId}, Tempo={Tempo}ms", request.Id, stopwatch.ElapsedMilliseconds);
+                _logger.LogError(ex, $"Erro ao atualizar curso: ID={request.Id}, Tempo={stopwatch.ElapsedMilliseconds}ms");
                 throw;
             }
         }

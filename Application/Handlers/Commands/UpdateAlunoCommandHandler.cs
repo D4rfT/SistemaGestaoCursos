@@ -20,7 +20,7 @@ namespace Application.Handlers.Commands
 
         public async Task<AlunoDto> Handle(UpdateAlunoCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Atualizando aluno ID={AlunoId}", request.Id);
+            _logger.LogInformation($"Atualizando aluno ID={request.Id}");
             var stopwatch = Stopwatch.StartNew();
             try
             {
@@ -28,21 +28,21 @@ namespace Application.Handlers.Commands
                 var aluno = await _unitOfWork.Alunos.GetByIdAsync(request.Id, cancellationToken);
                 if (aluno == null)
                 {
-                    _logger.LogWarning("Aluno não encontrado para atualização: ID={AlunoId}", request.Id);
+                    _logger.LogWarning($"Aluno não encontrado para atualização: ID={request.Id}");
                     throw new KeyNotFoundException($"Aluno com ID {request.Id} não encontrado");
                 }
 
                 var emailExistente = await _unitOfWork.Alunos.VerificarEmailExistenteAsync(request.Email, request.Id, cancellationToken);
                 if (emailExistente)
                 {
-                    _logger.LogWarning("Email já em uso: Email={Email}", request.Email);
+                    _logger.LogWarning($"Email já em uso: Email={request.Email}");
                     throw new InvalidOperationException($"Email {request.Email} já está em uso por outro aluno");
                 }
 
                 var curso = await _unitOfWork.Cursos.GetByIdAsync(request.CursoId, cancellationToken);
                 if (curso == null)
                 {
-                    _logger.LogWarning("Curso não encontrado: CursoId={CursoId}", request.CursoId);
+                    _logger.LogWarning($"Curso não encontrado: CursoId={request.CursoId}");
                     throw new KeyNotFoundException($"Curso com ID {request.CursoId} não encontrado");
                 }
 
@@ -53,7 +53,7 @@ namespace Application.Handlers.Commands
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
 
                 stopwatch.Stop();
-                _logger.LogInformation("Aluno atualizado: ID={AlunoId}, Tempo={Tempo}ms", request.Id, stopwatch.ElapsedMilliseconds);           
+                _logger.LogInformation($"Aluno atualizado: ID={request.Id}, Tempo={stopwatch.ElapsedMilliseconds}ms");           
                 var alunoAtualizado = await _unitOfWork.Alunos.GetByIdAsync(request.Id, cancellationToken);
 
                 return MapToDto(alunoAtualizado);
@@ -62,7 +62,7 @@ namespace Application.Handlers.Commands
             catch (Exception ex)
             {
                 stopwatch.Stop();
-                _logger.LogError(ex, "Erro ao atualizar aluno: ID={AlunoId}, Tempo={Tempo}ms", request.Id, stopwatch.ElapsedMilliseconds);
+                _logger.LogError(ex, $"Erro ao atualizar aluno: ID={request.Id}, Tempo={stopwatch.ElapsedMilliseconds}ms");
                 throw;
             }
         }

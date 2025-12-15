@@ -21,21 +21,21 @@ namespace Application.Handlers.Commands
 
         public async Task<CursoDto> Handle(CreateCursoCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Iniciando criação de curso: Nome={Nome}, Descricao={Descricao}, Preco={Preco}, Duracao={Duracao}h", request.Nome, request.Descricao, request.Preco, request.Duracao);
+            _logger.LogInformation($"Iniciando criação de curso: Nome={request.Nome}, Descricao={request.Descricao}, Preco={request.Preco}, Duracao={request.Duracao}h");
             var stopwatch = Stopwatch.StartNew();
 
             try
             {
-                _logger.LogDebug("Verificando se o curso '{Nome}' já existe", request.Nome);
+                _logger.LogDebug($"Verificando se o curso '{request.Nome}' já existe");
                 var cursoExistente = await _unitOfWork.Cursos.GetByNomeAsync(request.Nome, cancellationToken);
 
                 if (cursoExistente != null)
                 {
-                    _logger.LogWarning("Tentativa de criar curso com nome duplicado: Nome={Nome}, CursoExistenteId={CursoExistenteId}", request.Nome, cursoExistente.Id);
+                    _logger.LogWarning($"Tentativa de criar curso com nome duplicado: Nome={request.Nome}, CursoExistenteId={cursoExistente.Id}");
                     throw new InvalidOperationException($"Já existe um curso com o nome '{request.Nome}'");
                 }
 
-                _logger.LogDebug("Criando entidade Curso: Nome={Nome}", request.Nome);
+                _logger.LogDebug($"Criando entidade Curso: Nome={request.Nome}");
                 var novoCurso = new Curso(request.Nome, request.Descricao, request.Preco, request.Duracao);
 
 
@@ -44,7 +44,7 @@ namespace Application.Handlers.Commands
 
                 stopwatch.Stop();
 
-                _logger.LogInformation("Curso criado com sucesso: ID={CursoId}, Nome={Nome}, Tempo={Tempo}ms", novoCurso.Id, request.Nome, stopwatch.ElapsedMilliseconds);
+                _logger.LogInformation($"Curso criado com sucesso: ID={novoCurso.Id}, Nome={request.Nome}, Tempo={stopwatch.ElapsedMilliseconds}ms");
                 var cursoCriado = await _unitOfWork.Cursos.GetByIdAsync(novoCurso.Id, cancellationToken);
 
                 return MapToDto(cursoCriado);
@@ -53,7 +53,7 @@ namespace Application.Handlers.Commands
             {
                 stopwatch.Stop();
 
-                _logger.LogError(ex, "Erro ao criar curso: Nome={Nome}, Preco={Preco}, TempoDecorrido={TempoDecorrido}ms", request.Nome, request.Preco, stopwatch.ElapsedMilliseconds);
+                _logger.LogError(ex, $"Erro ao criar curso: Nome={request.Nome}, Preco={request.Preco}, TempoDecorrido={stopwatch.ElapsedMilliseconds}ms");
                 throw;
             }
         }

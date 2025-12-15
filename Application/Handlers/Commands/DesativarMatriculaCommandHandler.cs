@@ -11,9 +11,9 @@ namespace Application.Handlers.Commands
     public class DesativarMatriculaCommandHandler : IRequestHandler<DesativarMatriculaCommand, bool>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<ReativarMatriculaCommandHandler> _logger;
+        private readonly ILogger<DesativarMatriculaCommandHandler> _logger;
 
-        public DesativarMatriculaCommandHandler(IUnitOfWork unitOfWork, ILogger<ReativarMatriculaCommandHandler> logger)
+        public DesativarMatriculaCommandHandler(IUnitOfWork unitOfWork, ILogger<DesativarMatriculaCommandHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;

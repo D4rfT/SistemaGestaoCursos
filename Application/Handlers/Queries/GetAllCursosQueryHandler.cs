@@ -29,7 +29,7 @@ namespace Application.Handlers.Queries
                 var cursos = await _unitOfWork.Cursos.GetAllAsync(cancellationToken);
                 stopwatch.Stop();
 
-                _logger.LogInformation("Consulta de cursos concluída: TotalCursos={TotalCursos}, TempoExecucao={TempoExecucao}ms",cursos.Count(), stopwatch.ElapsedMilliseconds);
+                _logger.LogInformation($"Consulta de cursos concluída: TotalCursos={cursos.Count()}, TempoExecucao={stopwatch.ElapsedMilliseconds}ms");
 
                 if (cursos.Count() == 0)
                 {
@@ -42,7 +42,7 @@ namespace Application.Handlers.Queries
                     var cursosAtivos = cursos.Count(c => c.Ativo);
                     var cursosInativos = cursos.Count(c => !c.Ativo);
 
-                    _logger.LogDebug("Estatísticas: Ativos={Ativos}, Inativos={Inativos}",cursosAtivos, cursosInativos);
+                    _logger.LogDebug($"Estatísticas: Ativos={cursosAtivos}, Inativos={cursosInativos}");
                 }
 
                 return cursos.Select(MapToDto).ToList();
@@ -50,7 +50,7 @@ namespace Application.Handlers.Queries
             catch (Exception ex)
             {
                 stopwatch.Stop();
-                _logger.LogError(ex,"Erro ao consultar cursos: TempoDecorrido={TempoDecorrido}ms",stopwatch.ElapsedMilliseconds);
+                _logger.LogError(ex, $"Erro ao consultar cursos: TempoDecorrido={stopwatch.ElapsedMilliseconds}ms");
 
                 throw;
             }

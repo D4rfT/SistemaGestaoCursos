@@ -11,9 +11,9 @@ namespace Application.Handlers.Queries
     public class GetCursosAtivosQueryHandler : IRequestHandler<GetCursosAtivosQuery, List<CursoDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<GetAllCursosQueryHandler> _logger;
+        private readonly ILogger<GetCursosAtivosQueryHandler> _logger;
 
-        public GetCursosAtivosQueryHandler(IUnitOfWork unitOfWork, ILogger<GetAllCursosQueryHandler> logger)
+        public GetCursosAtivosQueryHandler(IUnitOfWork unitOfWork, ILogger<GetCursosAtivosQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
@@ -35,7 +35,7 @@ namespace Application.Handlers.Queries
             catch (Exception ex)
             {
                 stopwatch.Stop();
-                _logger.LogError(ex, "Erro ao consultar cursos ativos: TempoDecorrido={TempoDecorrido}ms", stopwatch.ElapsedMilliseconds);
+                _logger.LogError(ex, $"Erro ao consultar cursos ativos: TempoDecorrido={stopwatch.ElapsedMilliseconds}ms");
 
                 throw;
             }

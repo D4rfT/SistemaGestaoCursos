@@ -13,9 +13,7 @@ namespace Application.Handlers.Queries
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<GetCursosComFiltrosQueryHandler> _logger;
 
-        public GetCursosComFiltrosQueryHandler(
-            IUnitOfWork unitOfWork,
-            ILogger<GetCursosComFiltrosQueryHandler> logger)
+        public GetCursosComFiltrosQueryHandler(IUnitOfWork unitOfWork, ILogger<GetCursosComFiltrosQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
