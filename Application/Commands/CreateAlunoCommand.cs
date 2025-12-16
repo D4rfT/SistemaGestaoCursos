@@ -13,6 +13,7 @@ namespace Application.Commands
         public DateTime DataNascimento { get; set; }
         public int CursoId { get; set; }
 
+        public CreateAlunoCommand() { }
 
         public CreateAlunoCommand(string nome, string cPF, string email, DateTime dataNascimento, int cursoId)
         {

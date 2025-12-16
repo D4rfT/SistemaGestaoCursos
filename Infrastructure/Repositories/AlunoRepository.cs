@@ -13,20 +13,17 @@ namespace Infrastructure.Repositories
 
         public async Task<Aluno> GetByCpfAsync(string cpf, CancellationToken cancellationToken = default)
         {
-            return await _dbSet
-                .FirstOrDefaultAsync(a => a.CPF == cpf, cancellationToken);
+            return await _dbSet.FirstOrDefaultAsync(a => a.CPF == cpf, cancellationToken);
         }
 
         public async Task<Aluno> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
         {
-            return await _dbSet
-                .FirstOrDefaultAsync(a => a.Email.ToLower() == email.ToLower(), cancellationToken);
+            return await _dbSet.FirstOrDefaultAsync(a => a.Email.ToLower() == email.ToLower(), cancellationToken);
         }
 
         public async Task<Aluno> GetByRegistroAcademicoAsync(string registroAcademico, CancellationToken cancellationToken = default)
         {
-            return await _dbSet
-                .FirstOrDefaultAsync(a => a.RegistroAcademico == registroAcademico, cancellationToken);
+            return await _dbSet.FirstOrDefaultAsync(a => a.RegistroAcademico == registroAcademico, cancellationToken);
         }
 
         public async Task<bool> VerificarCpfExistenteAsync(string cpf, int? excludeAlunoId = null, CancellationToken cancellationToken = default)

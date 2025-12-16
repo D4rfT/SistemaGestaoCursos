@@ -5,7 +5,7 @@ using Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Xunit;
+
 
 namespace UnitTests.Application.Handlers.Commands
 {
@@ -42,6 +42,12 @@ namespace UnitTests.Application.Handlers.Commands
             // Assert
             result.Should().NotBeNull();
             result.Nome.Should().Be("Curso Teste");
+            result.Preco.Should().Be(command.Preco);
+            result.Duracao.Should().Be(command.Duracao);
+            result.Ativo.Should().BeTrue();
+
+            unitOfWorkMock.Verify(u => u.Cursos.AddAsync(It.IsAny<Curso>(),It.IsAny<CancellationToken>()),Times.Once);
+            unitOfWorkMock.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()),Times.Once);
         }
 
         [Fact]
@@ -68,6 +74,10 @@ namespace UnitTests.Application.Handlers.Commands
             // Act + Assert
             await Assert.ThrowsAsync<InvalidOperationException>(() => handler.Handle(command, CancellationToken.None));
 
+         
+            unitOfWorkMock.Verify(u => u.Cursos.AddAsync(It.IsAny<Curso>(),It.IsAny<CancellationToken>()),Times.Never); 
+            unitOfWorkMock.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()),Times.Never);
+
         }
         [Fact]
         public async Task Handle_ComPrecoNegativo_DeveLancarExcecao()
@@ -86,10 +96,13 @@ namespace UnitTests.Application.Handlers.Commands
                 Duracao = 40
             };
 
-            unitOfWorkMock.Setup(u => u.Cursos.GetByNomeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync((Domain.Entities.Curso)null);
+            unitOfWorkMock.Setup(u => u.Cursos.GetByNomeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync((Curso)null);
 
             //act + assert
             await Assert.ThrowsAsync<ArgumentException>(() => handler.Handle(command, CancellationToken.None));
+
+            unitOfWorkMock.Verify(u => u.Cursos.AddAsync(It.IsAny<Curso>(), It.IsAny<CancellationToken>()), Times.Never);
+            unitOfWorkMock.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
 
         }
 
@@ -110,10 +123,13 @@ namespace UnitTests.Application.Handlers.Commands
                 Duracao = 0
             };
 
-            unitOfWorkMock.Setup(u => u.Cursos.GetByNomeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync((Domain.Entities.Curso)null);
+            unitOfWorkMock.Setup(u => u.Cursos.GetByNomeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync((Curso)null);
 
             //act + assert
             await Assert.ThrowsAsync<ArgumentException>(() => handler.Handle(command, CancellationToken.None));
+
+            unitOfWorkMock.Verify(u => u.Cursos.AddAsync(It.IsAny<Curso>(), It.IsAny<CancellationToken>()), Times.Never);
+            unitOfWorkMock.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
         }
 
         [Fact]
@@ -133,10 +149,13 @@ namespace UnitTests.Application.Handlers.Commands
                 Duracao = 501
             };
 
-            unitOfWorkMock.Setup(u => u.Cursos.GetByNomeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync((Domain.Entities.Curso)null);
+            unitOfWorkMock.Setup(u => u.Cursos.GetByNomeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync((Curso)null);
 
             //act + assert
             await Assert.ThrowsAsync<ArgumentException>(() => handler.Handle(command, CancellationToken.None));
+
+            unitOfWorkMock.Verify(u => u.Cursos.AddAsync(It.IsAny<Curso>(), It.IsAny<CancellationToken>()), Times.Never);
+            unitOfWorkMock.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
         }
 
         [Fact]
@@ -168,7 +187,13 @@ namespace UnitTests.Application.Handlers.Commands
 
             // Assert
             result.Should().NotBeNull();
-            result.Nome.Should().Be("Curso Teste");
+            result.Nome.Should().Be("Curso Teste");          
+            result.Preco.Should().Be(command.Preco);
+            result.Duracao.Should().Be(command.Duracao);
+            result.Ativo.Should().BeTrue();
+
+            unitOfWorkMock.Verify(u => u.Cursos.AddAsync(It.IsAny<Curso>(), It.IsAny<CancellationToken>()), Times.Once);
+            unitOfWorkMock.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
@@ -201,6 +226,12 @@ namespace UnitTests.Application.Handlers.Commands
             // Assert
             result.Should().NotBeNull();
             result.Nome.Should().Be("Curso Teste");
+            result.Preco.Should().Be(command.Preco);
+            result.Duracao.Should().Be(command.Duracao);
+            result.Ativo.Should().BeTrue();
+
+            unitOfWorkMock.Verify(u => u.Cursos.AddAsync(It.IsAny<Curso>(), It.IsAny<CancellationToken>()), Times.Once);
+            unitOfWorkMock.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
@@ -233,6 +264,12 @@ namespace UnitTests.Application.Handlers.Commands
             // Assert
             result.Should().NotBeNull();
             result.Nome.Should().Be("Curso Teste");
+            result.Preco.Should().Be(command.Preco);
+            result.Duracao.Should().Be(command.Duracao);
+            result.Ativo.Should().BeTrue();
+
+            unitOfWorkMock.Verify(u => u.Cursos.AddAsync(It.IsAny<Curso>(), It.IsAny<CancellationToken>()), Times.Once);
+            unitOfWorkMock.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
@@ -265,6 +302,41 @@ namespace UnitTests.Application.Handlers.Commands
             // Assert
             result.Should().NotBeNull();
             result.Nome.Should().Be("Curso Teste");
+            result.Preco.Should().Be(command.Preco);
+            result.Duracao.Should().Be(command.Duracao);
+            result.Ativo.Should().BeTrue();
+
+            unitOfWorkMock.Verify(u => u.Cursos.AddAsync(It.IsAny<Curso>(), It.IsAny<CancellationToken>()), Times.Once);
+            unitOfWorkMock.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task Handle_ComErroAoSavarNoBanco_DeveLancarExcecao()
+        {
+            // Arrange
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var loggerMock = new Mock<ILogger<CreateCursoCommandHandler>>();
+            var handler = new CreateCursoCommandHandler(unitOfWorkMock.Object, loggerMock.Object);
+
+            var command = new CreateCursoCommand
+            {
+                Nome = "Curso Teste",
+                Descricao = "Descrição",
+                Preco = 1000,
+                Duracao = 40
+            };
+
+
+            unitOfWorkMock.Setup(u => u.Cursos.GetByNomeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync((Curso)null);
+
+
+            unitOfWorkMock.Setup(u => u.SaveChangesAsync(It.IsAny<CancellationToken>())).ThrowsAsync(new Exception("Erro no banco de dados"));  
+
+            // Act + Assert
+            await Assert.ThrowsAsync<Exception>(() => handler.Handle(command, CancellationToken.None));
+
+            unitOfWorkMock.Verify(u => u.Cursos.AddAsync(It.IsAny<Curso>(), It.IsAny<CancellationToken>()),Times.Once);
+            unitOfWorkMock.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()),Times.Once);
         }
     }
  }
