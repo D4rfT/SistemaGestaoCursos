@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{5B0D15A4-A77A-480A-B1FD-4DB70BDFFA5F}|UnitTests.Application\\UnitTests.Application.csproj|solutionrelative:unittests.application\\handlers\\commands\\createalunocommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{5B0D15A4-A77A-480A-B1FD-4DB70BDFFA5F}|UnitTests.Application\\UnitTests.Application.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\unittests.application\\handlers\\commands\\createcursocommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B0D15A4-A77A-480A-B1FD-4DB70BDFFA5F}|UnitTests.Application\\UnitTests.Application.csproj|solutionrelative:unittests.application\\handlers\\commands\\createcursocommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F7F108AA-C903-411A-B40A-551E947EE5ED}|Application\\Application.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\application\\handlers\\commands\\createalunocommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F7F108AA-C903-411A-B40A-551E947EE5ED}|Application\\Application.csproj|solutionrelative:application\\handlers\\commands\\createalunocommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{623DD97F-65CA-4A97-8695-B0B9E430D073}|Domain\\Domain.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\domain\\entities\\aluno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{623DD97F-65CA-4A97-8695-B0B9E430D073}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\aluno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B0D15A4-A77A-480A-B1FD-4DB70BDFFA5F}|UnitTests.Application\\UnitTests.Application.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\unittests.application\\handlers\\commands\\createcursocommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5B0D15A4-A77A-480A-B1FD-4DB70BDFFA5F}|UnitTests.Application\\UnitTests.Application.csproj|solutionrelative:unittests.application\\handlers\\commands\\createcursocommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{88A7C783-1B63-4EC5-A23D-F0E07E6A7D69}|Infrastructure\\Infrastructure.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\infrastructure\\repositories\\alunorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -190,8 +190,7 @@
               "RelativeToolTip": "Infrastructure\\Repositories\\AlunoRepository.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAIwC0AAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T19:59:11.443Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-16T19:59:11.443Z"
             },
             {
               "$type": "Document",
@@ -203,18 +202,17 @@
               "RelativeToolTip": "Application\\Handlers\\Commands\\CreateCursoCommandHandler.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T19:25:11.349Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-16T19:25:11.349Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "CreateCursoCommandHandlerTests.cs",
               "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\UnitTests.Application\\Handlers\\Commands\\CreateCursoCommandHandlerTests.cs",
               "RelativeDocumentMoniker": "UnitTests.Application\\Handlers\\Commands\\CreateCursoCommandHandlerTests.cs",
               "ToolTip": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\UnitTests.Application\\Handlers\\Commands\\CreateCursoCommandHandlerTests.cs",
               "RelativeToolTip": "UnitTests.Application\\Handlers\\Commands\\CreateCursoCommandHandlerTests.cs",
-              "ViewState": "AgIAAHEAAAAAAAAAAAAgwEsBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAgwEsBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-16T19:21:09.108Z",
               "EditorCaption": ""
@@ -229,12 +227,11 @@
               "RelativeToolTip": "Application\\Validations\\CreateAlunoCommandValidator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T19:19:32.02Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-16T19:19:32.02Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Aluno.cs",
               "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Domain\\Entities\\Aluno.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\Aluno.cs",
@@ -242,18 +239,17 @@
               "RelativeToolTip": "Domain\\Entities\\Aluno.cs",
               "ViewState": "AgIAAEkAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T19:19:22.072Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-16T19:19:22.072Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CreateAlunoCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Application\\Handlers\\Commands\\CreateAlunoCommandHandler.cs",
               "RelativeDocumentMoniker": "Application\\Handlers\\Commands\\CreateAlunoCommandHandler.cs",
               "ToolTip": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Application\\Handlers\\Commands\\CreateAlunoCommandHandler.cs",
               "RelativeToolTip": "Application\\Handlers\\Commands\\CreateAlunoCommandHandler.cs",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAowEEAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAADMAAAAAAAAAAAAowEEAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-16T19:19:17.008Z",
               "EditorCaption": ""
@@ -266,7 +262,7 @@
               "RelativeDocumentMoniker": "UnitTests.Application\\Handlers\\Commands\\CreateAlunoCommandHandlerTests.cs",
               "ToolTip": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\UnitTests.Application\\Handlers\\Commands\\CreateAlunoCommandHandlerTests.cs",
               "RelativeToolTip": "UnitTests.Application\\Handlers\\Commands\\CreateAlunoCommandHandlerTests.cs",
-              "ViewState": "AgIAALAAAAAAAAAAAAAQwL8AAACBAAAAAAAAAA==",
+              "ViewState": "AgIAAGcCAAAAAAAAAAAmwHwCAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-16T19:19:40.497Z",
               "EditorCaption": ""
@@ -281,8 +277,7 @@
               "RelativeToolTip": "Application\\Commands\\CreateAlunoCommand.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwBgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T19:29:24.015Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-16T19:29:24.015Z"
             },
             {
               "$type": "Document",
@@ -306,8 +301,7 @@
               "RelativeToolTip": "Application\\Behaviors\\ValidationBehavior.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAowCcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T18:34:14.631Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-03T18:34:14.631Z"
             },
             {
               "$type": "Document",
