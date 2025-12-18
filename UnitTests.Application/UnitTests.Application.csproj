@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\Queries\" />
     <Folder Include="Mocks\" />
   </ItemGroup>
 

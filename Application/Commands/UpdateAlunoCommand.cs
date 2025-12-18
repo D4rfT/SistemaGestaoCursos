@@ -11,6 +11,7 @@ namespace Application.Commands
         public DateTime DataNascimento { get; init; }
         public int CursoId { get; init; }
 
+        public UpdateAlunoCommand() { }
 
         public UpdateAlunoCommand(int id, string nome, string email, DateTime dataNascimento, int cursoId)
         {

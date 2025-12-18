@@ -11,6 +11,8 @@ namespace Application.Commands
         public decimal Preco { get; set; }
         public int Duracao { get; set; }
 
+        public UpdateCursoCommand() { }
+
         public UpdateCursoCommand(int id, string nome, string descricao, decimal preco, int duracao)
         {
             Id = id;

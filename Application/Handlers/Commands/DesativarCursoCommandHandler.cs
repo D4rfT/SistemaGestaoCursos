@@ -10,9 +10,9 @@ namespace Application.Handlers.Commands
     public class DesativarCursoCommandHandler : IRequestHandler<DesativarCursoCommand, bool>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<DesativarAlunoCommandHandler> _logger;
+        private readonly ILogger<DesativarCursoCommandHandler> _logger;
 
-        public DesativarCursoCommandHandler(IUnitOfWork unitOfWork, ILogger<DesativarAlunoCommandHandler> logger)
+        public DesativarCursoCommandHandler(IUnitOfWork unitOfWork, ILogger<DesativarCursoCommandHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;

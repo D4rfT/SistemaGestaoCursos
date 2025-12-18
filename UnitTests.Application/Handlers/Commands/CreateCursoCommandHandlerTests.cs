@@ -1,6 +1,7 @@
 ﻿using Application.Commands;
 using Application.Handlers.Commands;
 using Application.Interfaces;
+using Domain.Common;
 using Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
@@ -30,7 +31,7 @@ namespace UnitTests.Application.Handlers.Commands
 
             //reflection para setar Id
             var curso = new Curso("Curso Teste", "Descrição", 1000, 40);
-            var idProperty = typeof(Domain.Common.BaseEntity).GetProperty("Id");
+            var idProperty = typeof(BaseEntity).GetProperty("Id");
             idProperty?.SetValue(curso, 1);
 
             unitOfWorkMock.Setup(u => u.Cursos.GetByNomeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync((Curso)null);
@@ -176,7 +177,7 @@ namespace UnitTests.Application.Handlers.Commands
             };
 
             var curso = new Curso("Curso Teste", "Descrição", 1000, 1);
-            var idProperty = typeof(Domain.Common.BaseEntity).GetProperty("Id");
+            var idProperty = typeof(BaseEntity).GetProperty("Id");
             idProperty?.SetValue(curso, 1);
 
             unitOfWorkMock.Setup(u => u.Cursos.GetByNomeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync((Curso)null);
@@ -214,7 +215,7 @@ namespace UnitTests.Application.Handlers.Commands
             };
 
             var curso = new Curso("Curso Teste", "Descrição", 1000, 500);
-            var idProperty = typeof(Domain.Common.BaseEntity).GetProperty("Id");
+            var idProperty = typeof(BaseEntity).GetProperty("Id");
             idProperty?.SetValue(curso, 1);
 
             unitOfWorkMock.Setup(u => u.Cursos.GetByNomeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync((Curso)null);
@@ -252,7 +253,7 @@ namespace UnitTests.Application.Handlers.Commands
             };
 
             var curso = new Curso("Curso Teste", "Descrição", 0.01m, 250);
-            var idProperty = typeof(Domain.Common.BaseEntity).GetProperty("Id");
+            var idProperty = typeof(BaseEntity).GetProperty("Id");
             idProperty?.SetValue(curso, 1);
 
             unitOfWorkMock.Setup(u => u.Cursos.GetByNomeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync((Curso)null);
@@ -290,7 +291,7 @@ namespace UnitTests.Application.Handlers.Commands
             };
 
             var curso = new Curso("Curso Teste", "Descrição", 10000, 250);
-            var idProperty = typeof(Domain.Common.BaseEntity).GetProperty("Id");
+            var idProperty = typeof(BaseEntity).GetProperty("Id");
             idProperty?.SetValue(curso, 1);
 
             unitOfWorkMock.Setup(u => u.Cursos.GetByNomeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync((Curso)null);
