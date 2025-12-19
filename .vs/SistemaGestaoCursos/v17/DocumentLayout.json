@@ -1,12 +1,71 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F7F108AA-C903-411A-B40A-551E947EE5ED}|Application\\Application.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\application\\handlers\\queries\\getallcursosqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7F108AA-C903-411A-B40A-551E947EE5ED}|Application\\Application.csproj|solutionrelative:application\\handlers\\queries\\getallcursosqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACE1270E-218F-4979-BEEC-0B16796F7155}|SistemaGestaoCursos\\SistemaGestaoCursos.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\sistemagestaocursos\\healthchecks\\customhealthcheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACE1270E-218F-4979-BEEC-0B16796F7155}|SistemaGestaoCursos\\SistemaGestaoCursos.csproj|solutionrelative:sistemagestaocursos\\healthchecks\\customhealthcheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACE1270E-218F-4979-BEEC-0B16796F7155}|SistemaGestaoCursos\\SistemaGestaoCursos.csproj|c:\\users\\daniel\\source\\repos\\sistemagestaocursos\\sistemagestaocursos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACE1270E-218F-4979-BEEC-0B16796F7155}|SistemaGestaoCursos\\SistemaGestaoCursos.csproj|solutionrelative:sistemagestaocursos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GetAllCursosQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Application\\Handlers\\Queries\\GetAllCursosQueryHandler.cs",
+              "RelativeDocumentMoniker": "Application\\Handlers\\Queries\\GetAllCursosQueryHandler.cs",
+              "ToolTip": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Application\\Handlers\\Queries\\GetAllCursosQueryHandler.cs",
+              "RelativeToolTip": "Application\\Handlers\\Queries\\GetAllCursosQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEcAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T19:50:17.931Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomHealthCheck.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\SistemaGestaoCursos\\HealthChecks\\CustomHealthCheck.cs",
+              "RelativeDocumentMoniker": "SistemaGestaoCursos\\HealthChecks\\CustomHealthCheck.cs",
+              "ToolTip": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\SistemaGestaoCursos\\HealthChecks\\CustomHealthCheck.cs",
+              "RelativeToolTip": "SistemaGestaoCursos\\HealthChecks\\CustomHealthCheck.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T19:45:00.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\SistemaGestaoCursos\\Program.cs",
+              "RelativeDocumentMoniker": "SistemaGestaoCursos\\Program.cs",
+              "ToolTip": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\SistemaGestaoCursos\\Program.cs",
+              "RelativeToolTip": "SistemaGestaoCursos\\Program.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAOcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T19:41:17.574Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

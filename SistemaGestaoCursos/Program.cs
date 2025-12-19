@@ -6,18 +6,18 @@ using Infrastructure.Data;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Context;
 using Serilog.Events;
 using Serilog.Formatting.Json;
 using SistemaGestaoCursos.Extensions;
-using SistemaGestaoCursos.Filters;
+using SistemaGestaoCursos.HealthChecks;
 using SistemaGestaoCursos.Middleware;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Security.Claims;
 using System.Text;
 
@@ -25,13 +25,31 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-    
+
+builder.Services.AddMemoryCache();
+builder.Services.AddResponseCaching();
+
+builder.Services.AddControllers(options =>
+{
+    options.CacheProfiles.Add("Default30",new CacheProfile()
+        {
+            Duration = 30,  // 30 segundos
+            Location = ResponseCacheLocation.Any,
+            VaryByQueryKeys = new[] { "*" }
+        });
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck<ApplicationDbContext>(name: "database", tags: new[] { "ready" })
+    .AddCheck<CustomHealthCheck>("custom_health_check", HealthStatus.Unhealthy, new[] { "ready" });
+
 
 // Repositories
 builder.Services.AddScoped<ICursoRepository, CursoRepository>();
@@ -98,15 +116,13 @@ else
     loggerConfig.MinimumLevel.Information().WriteTo.Console(new JsonFormatter());
 }
 
-loggerConfig
-    .WriteTo.File(
+loggerConfig.WriteTo.File(
         path: "logs/log-.txt",
         rollingInterval: RollingInterval.Day,
         retainedFileCountLimit: 7,
         outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [{CorrelationId}] {Message:lj} {Properties:j}{NewLine}{Exception}");
 
 Log.Logger = loggerConfig.CreateLogger();
-
 
 builder.Host.UseSerilog();
 
@@ -129,6 +145,38 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    Predicate = _ => true, ResponseWriter = async (context, report) =>
+    {
+        context.Response.ContentType = "application/json";
+
+        var response = new
+        {
+            Status = report.Status.ToString(), Checks = report.Entries.Select(e => new
+            {
+                Name = e.Key,
+                Status = e.Value.Status.ToString(),
+                Duration = e.Value.Duration.TotalMilliseconds,
+                Error = e.Value.Exception?.Message
+            }),
+
+            TotalDuration = report.TotalDuration.TotalMilliseconds
+        };
+        await context.Response.WriteAsJsonAsync(response);
+    }
+});
+
+app.MapHealthChecks("/health/ready", new HealthCheckOptions
+{
+    Predicate = reg => reg.Tags.Contains("ready")
+});
+
+app.MapHealthChecks("/health/live", new HealthCheckOptions
+{
+    Predicate = _ => false  // Apenas verifica se a API está viva
+});
+
 app.Use(async (context, next) =>
 {
     var correlationId = context.Request.Headers["X-Correlation-ID"].FirstOrDefault() ?? Guid.NewGuid().ToString();
@@ -139,6 +187,8 @@ app.Use(async (context, next) =>
         await next(context);
     }
 });
+
+app.UseResponseCaching();
 
 app.UseSerilogRequestLogging(options =>
 {
@@ -177,7 +227,6 @@ app.UseSerilogRequestLogging(options =>
 
 // Exception Handler Middleware SEMPRE depois de  UseAuthorization
 app.UseMiddleware<ExceptionHandlerMiddleware>();
-
 app.MapControllers();
 
 
