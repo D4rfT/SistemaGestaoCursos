@@ -34,6 +34,9 @@
             "projectReferences": {
               "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Domain\\Domain.csproj": {
                 "projectPath": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Domain\\Domain.csproj"
+              },
+              "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Daniel\\source\\repos\\SistemaGestaoCursos\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }

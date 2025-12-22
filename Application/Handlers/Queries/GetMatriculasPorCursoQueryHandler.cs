@@ -36,7 +36,7 @@ namespace Application.Handlers.Queries
             catch (Exception ex)
             {
                 stopwatch.Stop();
-                _logger.LogInformation(ex, $"Erro ao consultar matrícula por curso");
+                _logger.LogError(ex, $"Erro ao consultar matrícula por curso");
 
                 throw;
             }

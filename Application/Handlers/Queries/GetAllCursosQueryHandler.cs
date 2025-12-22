@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Application.Models;
 using Application.Queries;
+using Infrastructure.Services;
 using Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -13,72 +14,59 @@ namespace Application.Handlers.Queries
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<GetAllCursosQueryHandler> _logger;
-        private readonly IMemoryCache _cache;
+        private readonly ICacheService _cacheService;
 
-        public GetAllCursosQueryHandler(IUnitOfWork unitOfWork, ILogger<GetAllCursosQueryHandler> logger, IMemoryCache cache)
+        public GetAllCursosQueryHandler(IUnitOfWork unitOfWork, ILogger<GetAllCursosQueryHandler> logger, ICacheService cacheService)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
-            _cache = cache;
+            _cacheService = cacheService;
         }
 
         public async Task<List<CursoDto>> Handle(GetAllCursosQuery request, CancellationToken cancellationToken)
         {
             const string cacheKey = "all_cursos";
 
-            if (_cache.TryGetValue(cacheKey, out List<CursoDto> cachedCursos))
-            {
-                _logger.LogDebug("Retornando cursos do cache");
-                return cachedCursos;
-            }
-
-            _logger.LogDebug("Iniciando consulta de todos os cursos");
-            var stopwatch = Stopwatch.StartNew();
-
-            try
-            {
-                var cursos = await _unitOfWork.Cursos.GetAllAsync(cancellationToken);
-                stopwatch.Stop();
-
-                _logger.LogInformation($"Consulta de cursos concluída: TotalCursos={cursos.Count()}, TempoExecucao={stopwatch.ElapsedMilliseconds}ms");
-
-                if (cursos.Count() == 0)
+            return await _cacheService.GetOrCreateAsync(
+                cacheKey,
+                async () =>
                 {
-                    _logger.LogWarning("Consulta de cursos retornou 0 resultados");
-                }
-                else
-                {
-                    _logger.LogDebug("Cursos encontrados: {@Cursos}", cursos.Select(c => new { c.Id, c.Nome, c.Ativo }).Take(5));
+                    _logger.LogDebug("Iniciando consulta de todos os cursos");
+                    var stopwatch = Stopwatch.StartNew();
 
-                    var cursosAtivos = cursos.Count(c => c.Ativo);
-                    var cursosInativos = cursos.Count(c => !c.Ativo);
-
-                    _logger.LogDebug($"Estatísticas: Ativos={cursosAtivos}, Inativos={cursosInativos}");
-                }
-
-                var result = cursos.Select(MapToDto).ToList();
-
-                var cacheOptions = new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(30))
-                    .SetSlidingExpiration(TimeSpan.FromSeconds(10))
-                    .RegisterPostEvictionCallback((key, value, reason, state) =>
+                    try
                     {
-                        _logger.LogDebug($"Cache expirado: {key}, motivo: {reason}");
-                    });
+                        _logger.LogDebug("Cache não encontrado, consultando banco...");
+                        var cursos = await _unitOfWork.Cursos.GetAllAsync(cancellationToken);
+                        stopwatch.Stop();
 
-                _cache.Set(cacheKey, result, cacheOptions);
-                _logger.LogDebug("Cursos salvos no cache por 30 segundos");
+                        _logger.LogInformation($"Consulta de cursos concluída: TotalCursos={cursos.Count()}, TempoExecucao={stopwatch.ElapsedMilliseconds}ms");
 
-                return result;
-            }
-            catch (Exception ex)
-            {
-                stopwatch.Stop();
-                _logger.LogError(ex, $"Erro ao consultar cursos: TempoDecorrido={stopwatch.ElapsedMilliseconds}ms");
+                        if (cursos.Count() == 0)
+                        {
+                            _logger.LogWarning("Consulta de cursos retornou 0 resultados");
+                        }
+                        else
+                        {
+                            _logger.LogDebug("Cursos encontrados: {@Cursos}",
+                                cursos.Select(c => new { c.Id, c.Nome, c.Ativo }).Take(5));
 
-                throw;
-            }
-        }
+                            var cursosAtivos = cursos.Count(c => c.Ativo);
+                            var cursosInativos = cursos.Count(c => !c.Ativo);
+
+                            _logger.LogDebug($"Estatísticas: Ativos={cursosAtivos}, Inativos={cursosInativos}");
+                        }
+
+                        return cursos.Select(MapToDto).ToList();
+                    }
+                    catch (Exception ex)
+                    {
+                        stopwatch.Stop();
+                        _logger.LogError(ex, $"Erro ao consultar cursos: TempoDecorrido={stopwatch.ElapsedMilliseconds}ms");
+                        throw;
+                    }
+                },
+                TimeSpan.FromSeconds(30));
 
         private CursoDto MapToDto(Curso curso)
         {

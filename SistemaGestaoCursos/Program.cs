@@ -4,6 +4,7 @@ using Application.Validations;
 using FluentValidation;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
+using Infrastructure.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -55,8 +56,9 @@ builder.Services.AddHealthChecks()
 builder.Services.AddScoped<ICursoRepository, CursoRepository>();
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 builder.Services.AddScoped<IMatriculaRepository, MatriculaRepository>();
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>(); // Novo repositório
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ICacheService, CacheService>();
 
 // MediatR
 builder.Services.AddMediatR(cfg =>
